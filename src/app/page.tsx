@@ -239,6 +239,8 @@ export default function Home() {
                   <span className="px-4 py-2 bg-cyan-900/30 text-cyan-100 rounded-full text-sm">MongoDB</span>
                   <span className="px-4 py-2 bg-cyan-900/30 text-cyan-100 rounded-full text-sm">Socket.io</span>
                   <span className="px-4 py-2 bg-cyan-900/30 text-cyan-100 rounded-full text-sm">EJS</span>
+                  <span className="px-4 py-2 bg-cyan-900/30 text-cyan-100 rounded-full text-sm">Firebase</span>
+                  <span className="px-4 py-2 bg-cyan-900/30 text-cyan-100 rounded-full text-sm">LLM's</span>
                   <span className="px-4 py-2 bg-cyan-900/30 text-cyan-100 rounded-full text-sm">Tailwind CSS</span>
                   <span className="px-4 py-2 bg-cyan-900/30 text-cyan-100 rounded-full text-sm">Bootstrap</span>
                 </div>
@@ -301,10 +303,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Portfolio Website",
-                description: "A modern, responsive portfolio website built with Next.js and Tailwind CSS, featuring smooth animations and a star background.",
+                title: "Neurohaven",
+                description: "A modern, feature-rich  mental health wellness platform with many features spanning from emotiontwin AI to heatmaps and mind journals.",
                 technologies: ["Next.js", "TypeScript", "Tailwind"],
-                link: "https://github.com/akkuraina/my-portfolio"
+                link: "https://github.com/akkuraina/neurohaven.git"
               },
               {
                 title: "YapMonster",
@@ -313,10 +315,10 @@ export default function Home() {
                 link: "https://github.com/akkuraina/YapMonster"
               },
               {
-                title: "E-commerce Platform",
-                description: "A feature-rich e-commerce platform with product management, user authentication, and payment integration.",
-                technologies: ["Next.js", "PostgreSQL", "Stripe"],
-                link: "https://github.com/akkuraina"
+                title: "InkSuggest",
+                description: "A dynamic AI powered app which takes user's personality inputs and suggests tattoo design ideas.",
+                technologies: ["gemini LLM", "javascript", "python"],
+                link: "https://github.com/akkuraina/InkSuggest.git"
               }
             ].map((project, index) => (
               <div 
