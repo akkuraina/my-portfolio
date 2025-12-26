@@ -52,7 +52,7 @@ export default function Home() {
             <div className="flex justify-center">
               <div className="relative w-[320px] h-[400px] md:w-[400px] md:h-[500px] rounded-2xl overflow-hidden border-2 border-cyan-100/20 shadow-2xl shadow-cyan-500/20">
                 <img
-                  src="/images/akku.png.jpg"
+                  src="public\images\akku.png"
                   alt="Akanksha"
                   className="w-full h-full object-cover object-center"
                   loading="eager"
@@ -61,7 +61,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-
+ 
           {/* Quick Stats/Skills */}
           <div className="w-full mt-20">
             <div className="max-w-4xl mx-auto">
@@ -203,10 +203,8 @@ export default function Home() {
                   <span className="text-gray-400">2023-2025</span>
                 </div>
                 <ul className="list-disc list-inside space-y-2 text-gray-300">
-                  <li>DJS MUNSOC - marketing assosiate </li>
+                  <li>IETE-ISF - Editorial Head</li>
                   <li>DJS NOVA - web dev (tech) assosiate</li>
-                  <li>ECELL - editorial assosiate</li>
-                  <li>IETE - editorial assosiate</li>
                 </ul>
               </div>
             </div>
