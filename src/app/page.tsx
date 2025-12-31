@@ -52,12 +52,12 @@ export default function Home() {
             <div className="flex justify-center">
               <div className="relative w-[320px] h-[400px] md:w-[400px] md:h-[500px] rounded-2xl overflow-hidden border-2 border-cyan-100/20 shadow-2xl shadow-cyan-500/20">
                 <img
-                  src="public\images\akku.png"
-                  alt="Akanksha"
-                  className="w-full h-full object-cover object-center"
-                  loading="eager"
-                  style={{ imageRendering: 'crisp-edges' }}
+                    src="/images/akku.png.jpg"
+                    alt="Akanksha"
+                    className="w-full h-full object-cover object-center"
+                    loading="eager"
                 />
+
               </div>
             </div>
           </div>
@@ -316,7 +316,7 @@ export default function Home() {
               },
               {
                 title: "InkSuggest",
-                description: "A dynamic AI powered app which takes user's personality inputs and suggests tattoo design ideas.",
+                description: "A dynamic AI powered app which takes user's personality inputs and suggests multiple stunning tattoo design ideas, along with tattoo placement.",
                 technologies: ["gemini LLM", "javascript", "python"],
                 link: "https://github.com/akkuraina/InkSuggest.git"
               }
