@@ -1,25 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --text: #000000;
-  --primary: #06b6d4;
-  --secondary: #0ea5e9;
-  --accent: #e0f2fe;
-  --muted: #64748b;
-  --card-bg: rgba(241, 245, 249, 0.3);
-  --card-border: rgba(0, 0, 0, 0.1);
+  --canvas: #f6f5f1;
+  --surface: #ffffff;
+  --hairline: #d1cec3;
+  --ink: #1c1b19;
+  --muted: #6b6862;
+  --accent: #1f6b5a;
+  --accent-tint: #bdddd0;
 }
 
 .dark {
-  --background: #000000;
-  --text: #ffffff;
-  --primary: #06b6d4;
-  --secondary: #0ea5e9;
-  --accent: #0c4a6e;
-  --muted: #94a3b8;
-  --card-bg: rgba(15, 23, 42, 0.3);
-  --card-border: rgba(186, 230, 253, 0.1);
+  --canvas: #14130f;
+  --surface: #1c1b17;
+  --hairline: #2b2a24;
+  --ink: #f3f1ea;
+  --muted: #9a968c;
+  --accent: #3fa98c;
+  --accent-tint: #16352c;
 }
 
 html {
@@ -27,58 +25,73 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  color: var(--text);
+  background: linear-gradient(180deg, var(--accent-tint), transparent 34rem), var(--canvas);
+  color: var(--ink);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Stars background */
-.stars {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
+.font-serif {
+  font-family: var(--font-fraunces), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
-.star {
-  position: absolute;
-  background-color: var(--text);
-  border-radius: 50%;
-  animation: twinkle var(--duration) ease-in-out infinite;
-  opacity: 0;
+.font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: var(--opacity);
-  }
+/* Custom Design System Utility Classes */
+.bg-canvas {
+  background-color: var(--canvas);
 }
 
-/* Custom keyframe animation for falling stars */
-@keyframes fall-star {
-  from {
-    transform: translateY(-20vh);
-  }
-  to {
-    transform: translateY(120vh);
-  }
+.bg-surface {
+  background-color: var(--surface);
 }
 
-/* Custom animation utility */
-.animate-fall-star {
-  animation: fall-star linear infinite;
+.border-hairline {
+  border-color: var(--hairline);
 }
 
-/* Typewriter Cursor */
-@keyframes blink {
+.text-ink {
+  color: var(--ink);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.bg-accent-tint {
+  background-color: var(--accent-tint);
+}
+
+.hover\:border-accent:hover {
+  border-color: var(--accent);
+}
+
+.hover\:text-accent:hover {
+  color: var(--accent);
+}
+
+.hover\:text-ink:hover {
+  color: var(--ink);
+}
+
+.hover\:bg-accent-tint:hover {
+  background-color: var(--accent-tint);
+}
+
+/* Animations */
+@keyframes cursor-blink {
   0%, 100% {
     opacity: 1;
   }
@@ -87,51 +100,50 @@ body {
   }
 }
 
-.animate-blink {
-  animation: blink 1s step-end infinite;
-  color: var(--primary);
-  font-weight: bold;
+.animate-cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: var(--canvas);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted);
-  border-radius: 5px;
+  background: var(--hairline);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-
-/* Theme-specific styles */
-.bg-slate-800\/30 {
-  background-color: var(--card-bg);
-}
-
-.border-cyan-100\/10 {
-  border-color: var(--card-border);
-}
-
-.hover\:border-cyan-100\/30:hover {
-  border-color: var(--card-border);
-}
-
-.text-cyan-100 {
-  color: var(--primary);
-}
-
-.text-gray-300 {
-  color: var(--text);
-}
-
-.text-gray-400 {
-  color: var(--muted);
-}
+  background: var(--accent);
+}

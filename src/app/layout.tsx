@@ -1,29 +1,30 @@
-import localFont from 'next/font/local';
+import { Inter, Fraunces, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '../components/ThemeProvider';
 import Navbar from '../components/Navbar';
-import StarBackground from '../components/StarBackground';
 
-const cascadiaMono = localFont({
-  src: [
-    {
-      path: '../fonts/CascadiaMono-VariableFont_wght.woff2',
-      weight: '100 900',
-      style: 'normal',
-    },
-    {
-      path: '../fonts/CascadiaMono-Italic-VariableFont_wght.woff2',
-      weight: '100 900',
-      style: 'italic',
-    }
-  ],
-  variable: '--font-cascadia-mono',
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+
+const geistMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+  display: 'swap',
+});
+
+
 export const metadata = {
-  title: 'Akanksha - Full Stack Developer',
-  description: 'Portfolio website showcasing my work as a Full Stack Developer',
+  title: 'Akanksha Raina | Full-Stack Developer & SDE',
+  description: 'Full-stack and mobile developer working across web, mobile, and AI-integrated systems.',
 };
 
 export default function RootLayout({
@@ -32,14 +33,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cascadiaMono.variable}>
-      <body className="font-mono">
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${geistMono.variable}`}>
+      <body className="bg-canvas text-ink antialiased transition-colors duration-300">
         <ThemeProvider>
-          <StarBackground />
           <Navbar />
           {children}
         </ThemeProvider>
       </body>
     </html>
   );
-}
+}
