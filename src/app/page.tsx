@@ -8,6 +8,7 @@ import Skills from '../components/Skills';
 import Leadership from '../components/Leadership';
 import Education from '../components/Education';
 import BuildTogether from '../components/BuildTogether';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <Leadership />
       <Education />
       <BuildTogether />
+      <Footer />
     </main>
   );
 }

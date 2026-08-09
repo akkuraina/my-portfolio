@@ -30,6 +30,18 @@ export default function Experience() {
       ],
       tech: ['ServiceNow', 'ITIL4'],
     },
+    {
+      dates: 'July 2024',
+      role: 'Robotics and Mechatronics Intern',
+      company: 'Naval Dockyard, Mumbai (WECORS)',
+      location: 'Fort, Mumbai',
+      mode: 'On-site',
+      bullets: [
+        'Contributed to mission-critical naval systems within WECORS by supporting calibration, overhaul, and maintenance activities.',
+        'Calibrated over 30 precision instruments and performed PCB soldering and in-circuit testing on 50+ ICs to ensure system reliability and operational readiness.',
+      ],
+      tech: ['Robotics', 'Mechatronics', 'PCB Soldering', 'Circuit Testing', 'WECORS', 'Naval Systems'],
+    },
   ];
 
   return (

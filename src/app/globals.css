@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #f6f5f1;
+  --canvas: #effbf9;
   --surface: #ffffff;
-  --hairline: #d1cec3;
-  --ink: #1c1b19;
-  --muted: #6b6862;
-  --accent: #1f6b5a;
-  --accent-tint: #bdddd0;
+  --hairline: #c5ebe6;
+  --ink: #031a24;
+  --muted: #4b6b73;
+  --accent: #0ea5c6;
+  --accent-tint: #d8f5f2;
 }
 
 .dark {
-  --canvas: #14130f;
-  --surface: #1c1b17;
-  --hairline: #2b2a24;
-  --ink: #f3f1ea;
-  --muted: #9a968c;
-  --accent: #3fa98c;
-  --accent-tint: #16352c;
+  --canvas: #020b10;
+  --surface: #031a24;
+  --hairline: #093340;
+  --ink: #f3f1e8;
+  --muted: #a8b7ba;
+  --accent: #19d3c5;
+  --accent-tint: #072d38;
 }
 
 html {
@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background: linear-gradient(180deg, var(--accent-tint), transparent 34rem), var(--canvas);
+  background: linear-gradient(180deg, var(--accent-tint) 0%, rgba(3, 26, 36, 0.5) 24rem, var(--canvas) 48rem), var(--canvas);
   color: var(--ink);
   min-height: 100vh;
   position: relative;
@@ -76,6 +76,7 @@ body {
 
 .hover\:border-accent:hover {
   border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(25, 211, 197, 0.16);
 }
 
 .hover\:text-accent:hover {
@@ -102,6 +103,7 @@ body {
 
 .animate-cursor {
   animation: cursor-blink 1s step-end infinite;
+  box-shadow: 0 0 8px rgba(25, 211, 197, 0.6);
 }
 
 @keyframes scanline {
@@ -146,4 +148,5 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
-}
+}
+

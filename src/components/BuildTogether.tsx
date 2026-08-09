@@ -15,12 +15,13 @@ export default function BuildTogether() {
         </h2>
 
         <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
-          Whether you have a product idea, an engineering role, or a complex full-stack/mobile application to build, feel free to reach out. Always open to discussing new engineering challenges.
+          If you want something that just works for the demo, I'm probably not your person.
+          If you want something built to scale, let's talk.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
-            href="mailto:akanksharainadjsce@gmail.com"
+            href="mailto:akanksharaina04@gmail.com"
             className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent bg-ink text-canvas hover:bg-accent h-11 px-5"
           >
             <Mail className="size-4" />
