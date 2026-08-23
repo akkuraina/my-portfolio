@@ -31,11 +31,11 @@ export default function Skills() {
     },
     {
       title: 'Databases & Infra',
-      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQLite', 'Prisma', 'Redis', 'Cloudflare R2'],
+      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQLite', 'Prisma', 'Redis', 'Cloudflare R2', 'Appwrite'],
     },
     {
       title: 'UI Libraries',
-      skills: ['Chakra UI', 'Material UI', 'TailwindCSS', 'Three.js', 'Framer Motion'],
+      skills: ['Chakra UI', 'Material UI', 'Watermelon UI', 'TailwindCSS', 'Three.js', 'Framer Motion'],
     },
   ];
 

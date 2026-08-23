@@ -25,16 +25,6 @@ export default function Projects() {
       previewUrl: 'https://www.tranceformissioncoaches.com',
     },
     {
-      name: 'Flagzilla',
-      tagline: 'Browser-based real-time 3D multiplayer game',
-      description:
-        'WebSocket-based player synchronization with authoritative backend state, real-time in-game chat, and state management for player states, game events, session lifecycle, authentication, matchmaking, and leaderboards.',
-      tech: ['Next.js', 'TypeScript', 'Three.js', 'React Three Fiber', 'WebSockets'],
-      github: 'https://github.com/akkuraina',
-      live: null,
-      previewUrl: null,
-    },
-    {
       name: 'YapMonster',
       tagline: 'Full-stack real-time chat application',
       description:
@@ -55,22 +45,52 @@ export default function Projects() {
       previewUrl: 'https://neurohaven-pink.vercel.app',
     },
     {
+      name: 'Flagzilla',
+      tagline: 'Browser-based real-time 3D multiplayer game',
+      description:
+        'WebSocket-based player synchronization with authoritative backend state, real-time in-game chat, and state management for player states, game events, session lifecycle, authentication, matchmaking, and leaderboards.',
+      tech: ['Next.js', 'TypeScript', 'Three.js', 'React Three Fiber', 'WebSockets'],
+      github: 'https://github.com/akkuraina/git-happens',
+      live: null,
+      previewUrl: null,
+    },
+    {
       name: 'Startup Discovery Radar',
       tagline: 'AI-powered startup intelligence platform',
       description:
         'Real-time discovery and intelligence platform aggregating startup data, market insights, and automated research summaries using fast LLM inference and web search.',
       tech: ['Next.js', 'FastAPI', 'MySQL', 'Groq', 'Tavily API', 'Python'],
-      github: 'https://github.com/akkuraina',
+      github: 'https://github.com/akkuraina/coderound-startup-discovery',
       live: null,
       previewUrl: null,
     },
     {
-      name: 'Fake News Detector',
-      tagline: 'Deep learning detector with Chrome extension',
+      name: 'Candidate Matcher',
+      tagline: 'Matches candidates with the role',
       description:
-        'Deep-learning classification model for real-time fake news verification, extended into an accessible browser extension using in-browser model inference.',
-      tech: ['Python', 'TensorFlow', 'TensorFlow.js', 'JavaScript', 'Chrome API', 'NLP'],
-      github: 'https://github.com/akkuraina',
+        'AI-powered recruitment platform that matches candidates with job roles using Natural Language Processing and Machine Learning techniques.',
+      tech: ['Python', 'PyTorch', 'Hugging Face Transformers', 'scikit-learn', 'Pandas'],
+      github: 'https://github.com/akkuraina/candidate-matcher',
+      live: null,
+      previewUrl: null,
+    },
+    {
+      name: 'GigRadar',
+      tagline: 'Local Artist & Underground Gig Finder',
+      description:
+        'Discovery platform for local live music gigs and independent artists featuring interactive map discovery, real-time check-ins, vibe-meter community ratings, Spotify/YouTube music embedding, and Cloudinary media uploads.',
+      tech: ['Next.js 15', 'React 19', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Socket.IO', 'Cloudinary'],
+      github: 'https://github.com/akkuraina/gigradar',
+      live: null,
+      previewUrl: null,
+    },
+    {
+      name: 'InkSuggest',
+      tagline: 'AI-powered semantic tattoo inspiration engine',
+      description:
+        'AI recommendation system utilizing Sentence-Transformers (all-MiniLM-L6-v2) and cosine similarity for semantic tattoo discovery, integrated with local LLMs (Ollama Llama 3) for personalized creative concept generation.',
+      tech: ['Python', 'FastAPI', 'PyTorch', 'Sentence-Transformers', 'Ollama (Llama 3)', 'SQLite', 'React', 'Vite'],
+      github: 'https://github.com/akkuraina/InkSuggest',
       live: null,
       previewUrl: null,
     },
