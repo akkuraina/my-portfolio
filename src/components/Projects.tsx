@@ -51,8 +51,8 @@ export default function Projects() {
         'WebSocket-based player synchronization with authoritative backend state, real-time in-game chat, and state management for player states, game events, session lifecycle, authentication, matchmaking, and leaderboards.',
       tech: ['Next.js', 'TypeScript', 'Three.js', 'React Three Fiber', 'WebSockets'],
       github: 'https://github.com/akkuraina/git-happens',
-      live: null,
-      previewUrl: null,
+      live: 'https://flagzilla.vercel.app',
+      previewUrl: 'https://flagzilla.vercel.app',
     },
     {
       name: 'Startup Discovery Radar',
