@@ -1,14 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { CodeXml, ExternalLink, Globe, MonitorPlay, X, Eye } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CodeXml, ExternalLink, Globe, MonitorPlay, ChevronRight } from 'lucide-react';
 
 export default function Projects() {
-  const [activeMobilePreview, setActiveMobilePreview] = useState<number | null>(null);
-
-  const toggleMobilePreview = (index: number) => {
-    setActiveMobilePreview((prev) => (prev === index ? null : index));
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const projects = [
     {
@@ -20,6 +17,16 @@ export default function Projects() {
       github: 'https://github.com/akkuraina/truepath',
       live: 'https://truepath-iota.vercel.app',
       previewUrl: 'https://truepath-iota.vercel.app',
+    },
+    {
+      name: 'Flagzilla',
+      tagline: 'Browser-based real-time 3D multiplayer game',
+      description:
+        'WebSocket-based player synchronization with authoritative backend state, real-time in-game chat, and state management for player states, game events, session lifecycle, authentication, matchmaking, and leaderboards.',
+      tech: ['Next.js', 'TypeScript', 'Three.js', 'React Three Fiber', 'WebSockets'],
+      github: 'https://github.com/akkuraina/git-happens',
+      live: 'https://flagzilla.vercel.app',
+      previewUrl: 'https://flagzilla.vercel.app',
     },
     {
       name: 'Tranceformission',
@@ -52,36 +59,6 @@ export default function Projects() {
       previewUrl: 'https://neurohaven-pink.vercel.app',
     },
     {
-      name: 'Flagzilla',
-      tagline: 'Browser-based real-time 3D multiplayer game',
-      description:
-        'WebSocket-based player synchronization with authoritative backend state, real-time in-game chat, and state management for player states, game events, session lifecycle, authentication, matchmaking, and leaderboards.',
-      tech: ['Next.js', 'TypeScript', 'Three.js', 'React Three Fiber', 'WebSockets'],
-      github: 'https://github.com/akkuraina/git-happens',
-      live: 'https://flagzilla.vercel.app',
-      previewUrl: 'https://flagzilla.vercel.app',
-    },
-    {
-      name: 'Startup Discovery Radar',
-      tagline: 'AI-powered startup intelligence platform',
-      description:
-        'Real-time discovery and intelligence platform aggregating startup data, market insights, and automated research summaries using fast LLM inference and web search.',
-      tech: ['Next.js', 'FastAPI', 'MySQL', 'Groq', 'Tavily API', 'Python'],
-      github: 'https://github.com/akkuraina/coderound-startup-discovery',
-      live: 'https://startupdiscovery.vercel.app',
-      previewUrl: 'https://startupdiscovery.vercel.app',
-    },
-    {
-      name: 'Funding Tracker',
-      tagline: 'Track funding of startups',
-      description:
-        'Track startup funding and hiring trends with real-time data and AI-powered insights.',
-      tech: ['Python', 'FastAPI', 'MySQL', 'Groq', 'Tavily API', 'Pandas', 'Crunchbase'],
-      github: 'https://github.com/akkuraina/startup-funding-tracker',
-      live: 'https://startup-funding-tracker.onrender.com',
-      previewUrl: 'https://startup-funding-tracker.onrender.com',
-    },
-    {
       name: 'GigRadar',
       tagline: 'Local Artist & Underground Gig Finder',
       description:
@@ -91,92 +68,144 @@ export default function Projects() {
       live: 'https://gigradar-vert.vercel.app',
       previewUrl: 'https://gigradar-vert.vercel.app',
     },
-    {
-      name: 'InkSuggest',
-      tagline: 'AI-powered semantic tattoo inspiration engine',
-      description:
-        'AI recommendation system utilizing Sentence-Transformers (all-MiniLM-L6-v2) and cosine similarity for semantic tattoo discovery, integrated with local LLMs (Ollama Llama 3) for personalized creative concept generation.',
-      tech: ['Python', 'FastAPI', 'PyTorch', 'Sentence-Transformers', 'Ollama (Llama 3)', 'SQLite', 'React', 'Vite'],
-      github: 'https://github.com/akkuraina/InkSuggest',
-      live: 'https://inksuggest.vercel.app',
-      previewUrl: 'https://inksuggest.vercel.app',
-    },
   ];
+
+  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = (index + 1) % projects.length;
+      setActiveIndex(nextIndex);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = (index - 1 + projects.length) % projects.length;
+      setActiveIndex(prevIndex);
+    }
+  };
+
+  const activeProject = projects[activeIndex] || projects[0];
 
   return (
     <section id="projects" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
       {/* Section Header */}
-      <div className="mb-8">
+      <div className="mb-10">
         <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent">
           ~/projects
         </p>
         <h2 className="mt-3 font-serif text-3xl font-bold text-ink sm:text-4xl">
           Products shipped end to end.
         </h2>
+        <p className="mt-2 text-sm text-muted max-w-xl">
+          Interactive explorer — select a project to inspect architecture, technical stack, and live deployments.
+        </p>
       </div>
 
-      {/* Grid Layout */}
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, index) => {
-          const isMobileActive = activeMobilePreview === index;
+      {/* Desktop Split View (>= md) */}
+      <div className="hidden md:grid md:grid-cols-12 gap-8 items-start">
+        {/* Left Column: Minimal Project List (~33% width) */}
+        <div 
+          className="md:col-span-4 lg:col-span-4 flex flex-col gap-2"
+          role="tablist"
+          aria-label="Projects Explorer"
+        >
+          {projects.map((project, index) => {
+            const isActive = activeIndex === index;
 
-          return (
-            <div key={index}>
-              <article 
-                onClick={() => toggleMobilePreview(index)}
-                className="group relative flex h-full min-h-[26rem] flex-col overflow-hidden rounded-xl border border-hairline bg-surface p-6 transition duration-300 hover:-translate-y-1 hover:border-accent shadow-[0_1px_0_rgba(28,27,25,0.04)] cursor-pointer md:cursor-default"
+            return (
+              <button
+                key={project.name}
+                id={`project-tab-${index}`}
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={`project-panel-${index}`}
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => setActiveIndex(index)}
+                onMouseEnter={() => setActiveIndex(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                className={`group relative flex items-center justify-between rounded-xl px-4 py-3.5 text-left transition-all duration-200 cursor-pointer border ${
+                  isActive
+                    ? 'border-accent bg-surface shadow-md'
+                    : 'border-transparent hover:border-hairline hover:bg-surface/50 text-muted'
+                }`}
               >
-
-                {/* Live Preview Overlay (Hover on Desktop, Tap on Mobile) */}
+                {/* Active Indicator Bar */}
                 <div 
-                  className={`absolute inset-0 z-20 flex flex-col bg-surface border border-accent rounded-xl transition-all duration-300 shadow-2xl overflow-hidden ${
-                    isMobileActive
-                      ? 'opacity-100 pointer-events-auto'
-                      : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
-                  }`}
-                  onClick={(e) => e.stopPropagation()}
-                >
+                  className={`absolute left-0 top-2.5 bottom-2.5 w-1 rounded-r-full transition-all duration-200 ${
+                    isActive ? 'bg-accent opacity-100 scale-y-100' : 'bg-transparent opacity-0 scale-y-0'
+                  }`} 
+                />
+
+                <div className="flex items-center gap-3 pl-1">
+                  <span className={`font-mono text-xs transition-colors duration-200 ${
+                    isActive ? 'text-accent font-semibold' : 'text-muted/60 group-hover:text-muted'
+                  }`}>
+                    0{index + 1}
+                  </span>
+                  <span className={`font-serif text-lg tracking-tight transition-colors duration-200 ${
+                    isActive ? 'text-ink font-bold' : 'text-muted group-hover:text-ink font-normal'
+                  }`}>
+                    {project.name}
+                  </span>
+                </div>
+
+                <ChevronRight 
+                  className={`size-4 transition-transform duration-200 ${
+                    isActive ? 'text-accent translate-x-0 opacity-100' : '-translate-x-2 opacity-0 text-muted group-hover:opacity-40'
+                  }`} 
+                />
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Right Column: Dynamic Detail Panel (~67% width) */}
+        <div className="md:col-span-8 lg:col-span-8">
+          <div className="relative min-h-[460px] rounded-2xl border border-hairline bg-surface/90 backdrop-blur-md p-6 sm:p-7 shadow-xl overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeProject.name}
+                id={`project-panel-${activeIndex}`}
+                role="tabpanel"
+                aria-labelledby={`project-tab-${activeIndex}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: 'easeOut' }}
+                className="flex flex-col gap-6"
+              >
+                {/* Top Browser Mockup Window */}
+                <div className="overflow-hidden rounded-xl border border-hairline bg-surface shadow-sm">
                   {/* Browser Mockup Bar */}
-                  <div className="flex items-center justify-between px-3 py-2 bg-accent-tint/50 border-b border-hairline text-xs font-mono">
+                  <div className="flex items-center justify-between px-3.5 py-2.5 bg-accent-tint/40 border-b border-hairline text-xs font-mono">
                     <div className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-red-400/80 inline-block" />
                       <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/80 inline-block" />
                       <span className="w-2.5 h-2.5 rounded-full bg-green-400/80 inline-block" />
                     </div>
-                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface/90 border border-hairline/60 text-[10px] text-muted max-w-[160px] sm:max-w-[190px] truncate">
-                      <Globe className="w-3 h-3 text-accent shrink-0" />
-                      <span className="truncate">{project.previewUrl || project.live || project.github}</span>
+                    <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface/90 border border-hairline/60 text-[11px] text-muted max-w-[280px] truncate">
+                      <Globe className="w-3.5 h-3.5 text-accent shrink-0" />
+                      <span className="truncate">{activeProject.previewUrl || activeProject.live || activeProject.github}</span>
                     </div>
-                    
-                    {/* Close button for Mobile / Preview */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setActiveMobilePreview(null);
-                      }}
-                      className="p-1 rounded hover:bg-accent-tint text-ink transition-colors flex items-center justify-center"
-                      title="Close Preview"
-                    >
-                      <X className="w-4 h-4 text-ink" />
-                    </button>
+                    <span className="text-[10px] font-mono text-accent uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-accent/10">
+                      LIVE PREVIEW
+                    </span>
                   </div>
 
-                  {/* Live Preview Frame / Mock Container */}
-                  <div className="relative flex-1 w-full h-full bg-surface overflow-hidden">
-                    {project.previewUrl ? (
+                  {/* Interactive Frame / Mock Preview */}
+                  <div className="relative h-64 sm:h-72 w-full bg-canvas/60 overflow-hidden flex items-center justify-center">
+                    {activeProject.previewUrl ? (
                       <div className="w-full h-full relative overflow-hidden bg-surface">
                         <iframe
-                          src={project.previewUrl}
-                          title={`${project.name} Live Preview`}
-                          className="w-[200%] h-[200%] transform scale-50 origin-top-left border-0 pointer-events-none select-none"
+                          src={activeProject.previewUrl}
+                          title={`${activeProject.name} Live Preview`}
+                          className="w-[200%] h-[200%] transform scale-50 origin-top-left border-0 select-none pointer-events-auto"
                           loading="lazy"
                         />
                         <div className="absolute bottom-3 right-3 z-30 flex items-center gap-2">
                           <a
-                            href={project.previewUrl}
+                            href={activeProject.previewUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1.5 rounded-md bg-accent text-surface px-3 py-1.5 font-mono text-xs font-semibold shadow-md hover:opacity-90 transition-opacity"
+                            className="inline-flex items-center gap-1.5 rounded-lg bg-accent text-surface px-3.5 py-1.5 font-mono text-xs font-semibold shadow-md hover:opacity-90 transition-opacity"
                           >
                             <ExternalLink className="size-3.5" />
                             Open Live Site
@@ -184,103 +213,219 @@ export default function Projects() {
                         </div>
                       </div>
                     ) : (
-                      <div className="flex flex-col items-center justify-center h-full p-6 text-center bg-surface/95">
-                        <div className="w-10 h-10 rounded-full bg-accent-tint flex items-center justify-center mb-3">
-                          <MonitorPlay className="w-5 h-5 text-accent" />
+                      <div className="flex flex-col items-center justify-center h-full p-6 text-center">
+                        <div className="w-12 h-12 rounded-full bg-accent-tint flex items-center justify-center mb-3">
+                          <MonitorPlay className="w-6 h-6 text-accent" />
                         </div>
-                        <h4 className="text-sm font-semibold text-ink font-serif">{project.name}</h4>
-                        <p className="text-xs text-muted mt-1 max-w-xs">{project.tagline}</p>
-                        <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-                          {project.tech.map((t, idx) => (
-                            <span key={idx} className="rounded bg-accent-tint/60 px-2 py-0.5 font-mono text-[10px] text-accent">
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-4 inline-flex items-center gap-1.5 rounded-md border border-hairline bg-surface text-ink px-3 py-1.5 font-mono text-xs hover:border-accent hover:text-accent transition-colors"
-                          >
-                            <CodeXml className="size-3.5" />
-                            GitHub Repository
-                          </a>
-                        )}
+                        <h4 className="text-base font-semibold text-ink font-serif">{activeProject.name}</h4>
+                        <p className="text-xs text-muted mt-1 max-w-sm">{activeProject.tagline}</p>
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* Standard Card Body */}
-                <div className="relative z-10 flex h-full flex-col">
-                  {/* Title & Mobile Preview Badge */}
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className="text-xl font-semibold text-ink">{project.name}</h3>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleMobilePreview(index);
-                      }}
-                      className="md:hidden inline-flex items-center gap-1 px-2 py-1 rounded bg-accent-tint text-[10px] font-mono text-accent font-medium hover:bg-accent hover:text-surface transition-colors"
-                    >
-                      <Eye className="w-3 h-3" />
-                      Preview
-                    </button>
+                {/* Project Details Content */}
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <div className="flex items-center justify-between gap-4">
+                      <h3 className="font-serif text-2xl sm:text-3xl font-bold text-ink">
+                        {activeProject.name}
+                      </h3>
+                      <div className="flex items-center gap-2">
+                        {activeProject.github && (
+                          <a
+                            href={activeProject.github}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-surface text-ink hover:border-accent hover:text-accent font-mono text-xs font-medium h-9 px-3.5 transition-colors shadow-sm"
+                            title="GitHub Repository"
+                          >
+                            <CodeXml className="size-4" />
+                            <span>Code</span>
+                          </a>
+                        )}
+                        {activeProject.live && (
+                          <a
+                            href={activeProject.live}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent text-surface hover:opacity-90 font-mono text-xs font-semibold h-9 px-3.5 transition-opacity shadow-sm"
+                            title="Live Deployment"
+                          >
+                            <ExternalLink className="size-4" />
+                            <span>Live Demo</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    <p className="mt-1 font-mono text-xs uppercase tracking-[0.16em] text-accent font-semibold">
+                      {activeProject.tagline}
+                    </p>
                   </div>
 
-                  {/* Monospace Tagline */}
-                  <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-accent">
-                    {project.tagline}
+                  <p className="text-sm leading-relaxed text-muted">
+                    {activeProject.description}
                   </p>
 
-                  {/* Description */}
-                  <p className="mt-4 flex-1 text-sm leading-6 text-muted">
-                    {project.description}
-                  </p>
-
-                  {/* Tech Pills */}
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.tech.map((t, tIndex) => (
-                      <span
-                        key={tIndex}
-                        className="rounded-md bg-accent-tint px-2.5 py-1 font-mono text-xs text-accent font-medium"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Links */}
-                  <div className="mt-6 flex flex-wrap gap-2 pt-2 border-t border-hairline/40">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center justify-center gap-2 rounded-md text-xs font-mono font-medium transition-colors border border-hairline bg-transparent text-ink hover:border-accent hover:text-accent h-9 px-3"
-                      >
-                        <CodeXml className="size-3.5" />
-                        GitHub
-                      </a>
-                    )}
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center justify-center gap-2 rounded-md text-xs font-mono font-medium transition-colors border border-hairline bg-transparent text-ink hover:border-accent hover:text-accent h-9 px-3"
-                      >
-                        <ExternalLink className="size-3.5" />
-                        Live
-                      </a>
-                    )}
+                  {/* Tech Stack Tags */}
+                  <div className="pt-2">
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-muted/70 mb-2 font-medium">
+                      Technologies & Frameworks
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {activeProject.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="rounded-md bg-accent-tint/80 border border-accent/20 px-2.5 py-1 font-mono text-xs text-accent font-medium shadow-xs"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </article>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Accordion View (< md) */}
+      <div className="flex md:hidden flex-col gap-3">
+        {projects.map((project, index) => {
+          const isOpen = activeIndex === index;
+
+          return (
+            <div
+              key={project.name}
+              className={`overflow-hidden rounded-xl border transition-all duration-200 ${
+                isOpen
+                  ? 'border-accent bg-surface shadow-md'
+                  : 'border-hairline bg-surface/70'
+              }`}
+            >
+              {/* Accordion Header */}
+              <button
+                type="button"
+                onClick={() => setActiveIndex(isOpen ? -1 : index)}
+                aria-expanded={isOpen}
+                className="flex w-full items-center justify-between p-4 text-left cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <span className={`font-mono text-xs font-semibold ${
+                    isOpen ? 'text-accent' : 'text-muted/60'
+                  }`}>
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h3 className={`font-serif text-lg font-bold ${
+                      isOpen ? 'text-ink' : 'text-muted'
+                    }`}>
+                      {project.name}
+                    </h3>
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-accent mt-0.5">
+                      {project.tagline}
+                    </p>
+                  </div>
+                </div>
+
+                <ChevronRight
+                  className={`size-5 text-accent shrink-0 transition-transform duration-200 ${
+                    isOpen ? 'rotate-90' : 'rotate-0'
+                  }`}
+                />
+              </button>
+
+              {/* Accordion Body */}
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-4 pt-1 border-t border-hairline/60 flex flex-col gap-4">
+                      {/* Live Preview Bar & Frame on Mobile */}
+                      {project.previewUrl && (
+                        <div className="overflow-hidden rounded-lg border border-hairline bg-surface mt-2">
+                          <div className="flex items-center justify-between px-3 py-1.5 bg-accent-tint/40 border-b border-hairline text-[10px] font-mono">
+                            <div className="flex items-center gap-1">
+                              <span className="w-2 h-2 rounded-full bg-red-400 inline-block" />
+                              <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block" />
+                              <span className="w-2 h-2 rounded-full bg-green-400 inline-block" />
+                            </div>
+                            <span className="truncate max-w-[170px] text-muted">{project.previewUrl}</span>
+                          </div>
+                          <div className="relative h-48 w-full bg-surface overflow-hidden">
+                            <iframe
+                              src={project.previewUrl}
+                              title={`${project.name} Mobile Preview`}
+                              className="w-[200%] h-[200%] transform scale-50 origin-top-left border-0 select-none pointer-events-none"
+                              loading="lazy"
+                            />
+                            <div className="absolute bottom-2.5 right-2.5 z-20">
+                              <a
+                                href={project.previewUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-1 rounded bg-accent text-surface px-2.5 py-1 font-mono text-[11px] font-semibold shadow-sm"
+                              >
+                                <ExternalLink className="size-3" />
+                                Visit Live
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Description */}
+                      <p className="text-sm leading-relaxed text-muted">
+                        {project.description}
+                      </p>
+
+                      {/* Tech Pills */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tech.map((t) => (
+                          <span
+                            key={t}
+                            className="rounded bg-accent-tint/80 border border-accent/20 px-2 py-0.5 font-mono text-[10px] text-accent font-medium"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Links */}
+                      <div className="flex items-center gap-2 pt-2 border-t border-hairline/50">
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-surface text-ink hover:border-accent hover:text-accent font-mono text-xs font-medium h-9 px-3 transition-colors"
+                          >
+                            <CodeXml className="size-3.5" />
+                            <span>Code</span>
+                          </a>
+                        )}
+                        {project.live && (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-accent text-surface hover:opacity-90 font-mono text-xs font-semibold h-9 px-3 transition-opacity"
+                          >
+                            <ExternalLink className="size-3.5" />
+                            <span>Live Demo</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}
