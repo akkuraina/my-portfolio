@@ -102,60 +102,69 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Full-Screen Mobile Drawer */}
+      {/* Mobile Backdrop & Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-16 bottom-0 z-50 flex flex-col justify-between bg-canvas/98 p-6 backdrop-blur-xl md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-200 border-b border-hairline shadow-2xl">
-          <div className="flex flex-col gap-3 pt-2">
-            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-accent mb-1 px-1">Navigation</p>
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between rounded-xl border border-hairline/80 bg-surface/70 px-4 py-3.5 font-mono text-base font-semibold text-ink shadow-sm hover:border-accent hover:bg-accent-tint/60 hover:text-accent transition-all active:scale-[0.99]"
-              >
-                <span>{link.label}</span>
-                <ChevronRight className="size-4 text-accent" />
-              </a>
-            ))}
-          </div>
+        <>
+          {/* Solid Full-Screen Backdrop Overlay */}
+          <div 
+            className="fixed inset-0 top-16 z-40 bg-canvas opacity-100 md:hidden" 
+            onClick={() => setMobileMenuOpen(false)}
+          />
 
-          <div className="mt-8 flex flex-col gap-3 pt-4 border-t border-hairline/80">
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-xl bg-accent text-surface px-4 py-3.5 font-mono text-sm font-semibold shadow-md hover:opacity-90 active:scale-[0.99] transition-all"
-            >
-              <FileText className="size-4" />
-              View Resume
-            </a>
-            
-            <div className="grid grid-cols-2 gap-3 mt-1">
+          {/* Solid Opaque Drawer */}
+          <div className="absolute top-full left-0 right-0 z-50 flex flex-col gap-4 border-b-2 border-hairline bg-canvas p-6 md:hidden shadow-2xl max-h-[calc(100dvh-4rem)] overflow-y-auto text-ink">
+            <div className="flex flex-col gap-2.5">
+              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-accent mb-1 px-1">Navigation</p>
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between rounded-xl border border-hairline bg-surface px-4.5 py-3.5 font-mono text-base font-semibold text-ink shadow-sm hover:border-accent hover:bg-accent-tint hover:text-accent transition-all active:scale-[0.99]"
+                >
+                  <span>{link.label}</span>
+                  <ChevronRight className="size-4 text-accent" />
+                </a>
+              ))}
+            </div>
+
+            <div className="flex flex-col gap-3 pt-4 border-t border-hairline">
               <a
-                href="https://github.com/akkuraina"
+                href="/resume.pdf"
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface/80 px-4 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
+                className="flex items-center justify-center gap-2 rounded-xl bg-accent text-surface px-4 py-3.5 font-mono text-sm font-semibold shadow-md hover:opacity-90 transition-all active:scale-[0.99]"
               >
-                <CodeXml className="size-4" />
-                GitHub
+                <FileText className="size-4" />
+                View Resume
               </a>
-              <a
-                href="https://www.linkedin.com/in/akanksha-raina-4637b5268/"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface/80 px-4 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
-              >
-                <Contact className="size-4" />
-                LinkedIn
-              </a>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <a
+                  href="https://github.com/akkuraina"
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface px-3 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
+                >
+                  <CodeXml className="size-4" />
+                  GitHub
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/akanksha-raina-4637b5268/"
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface px-3 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
+                >
+                  <Contact className="size-4" />
+                  LinkedIn
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );
