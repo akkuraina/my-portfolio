@@ -21,6 +21,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
+    { label: 'About', href: '/#about' },
     { label: 'Work', href: '/#experience' },
     { label: 'Projects', href: '/#projects' },
     { label: 'Skills', href: '/#skills' },
@@ -30,9 +31,12 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/90 backdrop-blur-md transition-colors duration-300">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6" aria-label="Primary">
-        {/* Logo */}
-        <Link href="/" className="font-serif text-2xl font-bold tracking-tight text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
-          AR
+        {/* Home Link (Replaces AR) */}
+        <Link 
+          href="/#top" 
+          className="font-serif text-xl font-bold tracking-tight text-ink hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        >
+          Home
         </Link>
 
         {/* Desktop Nav Links */}

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { CodeXml, ExternalLink, Globe, MonitorPlay, ChevronRight } from 'lucide-react';
 
 export default function Projects() {
@@ -82,17 +82,47 @@ export default function Projects() {
     }
   };
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
+  const [typedTag, setTypedTag] = useState('');
+  const [typingComplete, setTypingComplete] = useState(false);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const fullText = '~/projects';
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedTag(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(interval);
+        setTypingComplete(true);
+      }
+    }, 75);
+    return () => clearInterval(interval);
+  }, [isInView]);
+
   const activeProject = projects[activeIndex] || projects[0];
 
   return (
-    <section id="projects" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
+    <motion.section
+      ref={sectionRef}
+      id="projects"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className="mx-auto max-w-6xl px-5 py-20 sm:px-6"
+    >
       {/* Section Header */}
       <div className="mb-10">
-        <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent">
-          ~/projects
-        </p>
+        <div className="flex items-center gap-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent h-5">
+          <span>{typedTag}</span>
+          <span className={`inline-block w-1.5 h-3.5 bg-accent ${typingComplete ? 'animate-cursor' : 'opacity-100'}`} />
+        </div>
         <h2 className="mt-3 font-serif text-3xl font-bold text-ink sm:text-4xl">
-          Products shipped end to end.
+          Builds that made it to prod.
         </h2>
         <p className="mt-2 text-sm text-muted max-w-xl">
           Interactive explorer — select a project to inspect architecture, technical stack, and live deployments.
@@ -430,6 +460,6 @@ export default function Projects() {
           );
         })}
       </div>
-    </section>
+    </motion.section>
   );
 }

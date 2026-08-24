@@ -1,14 +1,29 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Hero from '../components/Hero';
 import About from '../components/About';
-import Experience from '../components/Experience';
-import Projects from '../components/Projects';
-import Skills from '../components/Skills';
-import Leadership from '../components/Leadership';
-import Education from '../components/Education';
-import BuildTogether from '../components/BuildTogether';
-import Footer from '../components/Footer';
+
+// Lazy load below-the-fold components with Next.js dynamic imports
+const Experience = dynamic(() => import('../components/Experience'), {
+  ssr: true,
+});
+
+const Projects = dynamic(() => import('../components/Projects'), {
+  ssr: true,
+});
+
+const Skills = dynamic(() => import('../components/Skills'), {
+  ssr: true,
+});
+
+const BuildTogether = dynamic(() => import('../components/BuildTogether'), {
+  ssr: true,
+});
+
+const Footer = dynamic(() => import('../components/Footer'), {
+  ssr: true,
+});
 
 export default function Home() {
   return (
@@ -18,8 +33,6 @@ export default function Home() {
       <Experience />
       <Projects />
       <Skills />
-      <Leadership />
-      <Education />
       <BuildTogether />
       <Footer />
     </main>

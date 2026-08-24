@@ -1,22 +1,66 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
+import { motion, useInView, type Variants } from 'framer-motion';
 import { Mail, FileText, CodeXml, Contact } from 'lucide-react';
 
+const sectionVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
 export default function BuildTogether() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const [typedTag, setTypedTag] = useState('');
+  const [typingComplete, setTypingComplete] = useState(false);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const fullText = '~/build-together';
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedTag(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(interval);
+        setTypingComplete(true);
+      }
+    }, 75);
+    return () => clearInterval(interval);
+  }, [isInView]);
+
   return (
-    <section id="build" className="mx-auto max-w-6xl px-5 py-20 sm:px-6">
+    <motion.section
+      ref={sectionRef}
+      id="build"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
+      className="mx-auto max-w-6xl px-5 py-20 sm:px-6"
+    >
       <div className="rounded-2xl border border-hairline bg-surface/80 p-8 sm:p-12 shadow-[0_1px_0_rgba(28,27,25,0.04)] backdrop-blur">
-        <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent">
-          ~/build-together
-        </p>
+        <div className="flex items-center gap-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent h-5">
+          <span>{typedTag}</span>
+          <span className={`inline-block w-1.5 h-3.5 bg-accent ${typingComplete ? 'animate-cursor' : 'opacity-100'}`} />
+        </div>
 
         <h2 className="mt-4 max-w-2xl font-serif text-3xl font-bold text-ink sm:text-5xl">
           Let&apos;s build something worth shipping.
         </h2>
 
         <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
-          If you want something that just works for the demo, I'm probably not your person.
-          If you want something built to scale, let's talk.
+          If you want something that just works for the demo, I&apos;m probably not your person.
+          If you want something built to scale, let&apos;s talk.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -64,6 +108,6 @@ export default function BuildTogether() {
           <p>© {new Date().getFullYear()} Akanksha Raina. All rights reserved.</p>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
