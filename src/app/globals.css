@@ -136,6 +136,127 @@ body {
   animation: marquee 25s linear infinite;
 }
 
+/* Ambient Ocean Wave Drift Animations (GPU Accelerated) */
+@keyframes wave-drift-slow {
+  0% {
+    transform: translate3d(0%, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(12%, -3%, 0) scale(1.03);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0) scale(1);
+  }
+}
+
+@keyframes wave-drift-reverse {
+  0% {
+    transform: translate3d(0%, 0, 0) scale(1.02);
+  }
+  50% {
+    transform: translate3d(-14%, 3%, 0) scale(0.98);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0) scale(1.02);
+  }
+}
+
+@keyframes wave-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 12px, 0);
+  }
+}
+
+.animate-wave-drift-slow {
+  animation: wave-drift-slow 30s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-wave-drift-reverse {
+  animation: wave-drift-reverse 38s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-wave-float {
+  animation: wave-float 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Ambient Aurora Mesh Gradient Blob Animations */
+@keyframes aurora-blob-1 {
+  0% {
+    transform: translate3d(0%, 0%, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(14%, -10%, 0) scale(1.12) rotate(45deg);
+  }
+  66% {
+    transform: translate3d(-8%, 12%, 0) scale(0.92) rotate(90deg);
+  }
+  100% {
+    transform: translate3d(0%, 0%, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes aurora-blob-2 {
+  0% {
+    transform: translate3d(0%, 0%, 0) scale(1.05) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(-15%, 8%, 0) scale(0.9) rotate(-60deg);
+  }
+  66% {
+    transform: translate3d(10%, -12%, 0) scale(1.15) rotate(-120deg);
+  }
+  100% {
+    transform: translate3d(0%, 0%, 0) scale(1.05) rotate(0deg);
+  }
+}
+
+@keyframes aurora-blob-3 {
+  0% {
+    transform: translate3d(0%, 0%, 0) scale(0.95);
+  }
+  50% {
+    transform: translate3d(12%, 14%, 0) scale(1.18);
+  }
+  100% {
+    transform: translate3d(0%, 0%, 0) scale(0.95);
+  }
+}
+
+.animate-aurora-blob-1 {
+  animation: aurora-blob-1 34s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-aurora-blob-2 {
+  animation: aurora-blob-2 44s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-aurora-blob-3 {
+  animation: aurora-blob-3 26s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora-blob-1,
+  .animate-aurora-blob-2,
+  .animate-aurora-blob-3,
+  .animate-wave-drift-slow,
+  .animate-wave-drift-reverse,
+  .animate-wave-float,
+  .animate-scanline,
+  .animate-marquee,
+  .animate-cursor {
+    animation: none !important;
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

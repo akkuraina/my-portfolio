@@ -2,6 +2,7 @@ import { Inter, Fraunces, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '../components/ThemeProvider';
 import Navbar from '../components/Navbar';
+import AmbientOceanBackground from '../components/AmbientOceanBackground';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -44,6 +45,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${fraunces.variable} ${geistMono.variable}`}>
       <body className="bg-canvas text-ink antialiased transition-colors duration-300">
         <ThemeProvider>
+          <AmbientOceanBackground />
           <Navbar />
           {children}
         </ThemeProvider>
