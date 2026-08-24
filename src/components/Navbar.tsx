@@ -1,12 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
-import { CodeXml, Contact, Menu, X, FileText } from 'lucide-react';
+import { CodeXml, Contact, Menu, X, FileText, ChevronRight } from 'lucide-react';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { label: 'Work', href: '/#experience' },
@@ -16,7 +28,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/80 backdrop-blur transition-colors duration-300">
+    <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/90 backdrop-blur-md transition-colors duration-300">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6" aria-label="Primary">
         {/* Logo */}
         <Link href="/" className="font-serif text-2xl font-bold tracking-tight text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
@@ -38,7 +50,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right Actions */}
+        {/* Right Actions (Desktop) */}
         <div className="hidden items-center gap-2 md:flex">
           <a
             href="/resume.pdf"
@@ -78,11 +90,11 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu toggle button */}
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent text-muted hover:bg-accent-tint hover:text-ink size-10 px-0"
+            className="inline-flex items-center justify-center rounded-lg border border-hairline bg-surface p-2 text-ink transition-colors hover:border-accent hover:text-accent size-10 focus:outline-none"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -90,44 +102,55 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Full-Screen Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="border-b border-hairline bg-surface p-5 md:hidden">
-          <div className="flex flex-col gap-4 font-mono text-sm">
+        <div className="fixed inset-x-0 top-16 bottom-0 z-50 flex flex-col justify-between bg-canvas/98 p-6 backdrop-blur-xl md:hidden overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-200 border-b border-hairline shadow-2xl">
+          <div className="flex flex-col gap-3 pt-2">
+            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-accent mb-1 px-1">Navigation</p>
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-muted hover:text-accent transition-colors"
+                className="flex items-center justify-between rounded-xl border border-hairline/80 bg-surface/70 px-4 py-3.5 font-mono text-base font-semibold text-ink shadow-sm hover:border-accent hover:bg-accent-tint/60 hover:text-accent transition-all active:scale-[0.99]"
               >
-                {link.label}
+                <span>{link.label}</span>
+                <ChevronRight className="size-4 text-accent" />
               </a>
             ))}
-            <div className="flex items-center gap-3 pt-3 border-t border-hairline">
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md text-xs font-medium border border-hairline px-3 py-1.5 text-ink hover:border-accent hover:text-accent"
-              >
-                <FileText className="size-3.5" />
-                Resume
-              </a>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3 pt-4 border-t border-hairline/80">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 rounded-xl bg-accent text-surface px-4 py-3.5 font-mono text-sm font-semibold shadow-md hover:opacity-90 active:scale-[0.99] transition-all"
+            >
+              <FileText className="size-4" />
+              View Resume
+            </a>
+            
+            <div className="grid grid-cols-2 gap-3 mt-1">
               <a
                 href="https://github.com/akkuraina"
                 target="_blank"
                 rel="noreferrer"
-                className="text-muted hover:text-ink"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface/80 px-4 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
               >
+                <CodeXml className="size-4" />
                 GitHub
               </a>
               <a
                 href="https://www.linkedin.com/in/akanksha-raina-4637b5268/"
                 target="_blank"
                 rel="noreferrer"
-                className="text-muted hover:text-ink"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface/80 px-4 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
               >
+                <Contact className="size-4" />
                 LinkedIn
               </a>
             </div>

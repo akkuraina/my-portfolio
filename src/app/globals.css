@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #effbf9;
+  --canvas: #f8fafc;
   --surface: #ffffff;
-  --hairline: #c5ebe6;
-  --ink: #031a24;
-  --muted: #4b6b73;
-  --accent: #0ea5c6;
-  --accent-tint: #d8f5f2;
+  --hairline: #cbd5e1;
+  --ink: #0f172a;
+  --muted: #334155;
+  --accent: #0284c7;
+  --accent-tint: #e0f2fe;
 }
 
 .dark {
@@ -25,12 +25,16 @@ html {
 }
 
 body {
-  background: linear-gradient(180deg, var(--accent-tint) 0%, rgba(3, 26, 36, 0.5) 24rem, var(--canvas) 48rem), var(--canvas);
+  background: linear-gradient(180deg, var(--accent-tint) 0%, rgba(224, 242, 254, 0.4) 24rem, var(--canvas) 48rem), var(--canvas);
   color: var(--ink);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark body {
+  background: linear-gradient(180deg, var(--accent-tint) 0%, rgba(3, 26, 36, 0.6) 24rem, var(--canvas) 48rem), var(--canvas);
 }
 
 .font-serif {
