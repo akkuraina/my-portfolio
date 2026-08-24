@@ -81,8 +81,8 @@ export default function Projects() {
         'Discovery platform for local live music gigs and independent artists featuring interactive map discovery, real-time check-ins, vibe-meter community ratings, Spotify/YouTube music embedding, and Cloudinary media uploads.',
       tech: ['Next.js 15', 'React 19', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Socket.IO', 'Cloudinary'],
       github: 'https://github.com/akkuraina/gigradar',
-      live: null,
-      previewUrl: null,
+      live: 'https://gigradar-vert.vercel.app',
+      previewUrl: 'https://gigradar-vert.vercel.app',
     },
     {
       name: 'InkSuggest',
@@ -91,8 +91,8 @@ export default function Projects() {
         'AI recommendation system utilizing Sentence-Transformers (all-MiniLM-L6-v2) and cosine similarity for semantic tattoo discovery, integrated with local LLMs (Ollama Llama 3) for personalized creative concept generation.',
       tech: ['Python', 'FastAPI', 'PyTorch', 'Sentence-Transformers', 'Ollama (Llama 3)', 'SQLite', 'React', 'Vite'],
       github: 'https://github.com/akkuraina/InkSuggest',
-      live: null,
-      previewUrl: null,
+      live: 'https://inksuggest.vercel.app',
+      previewUrl: 'https://inksuggest.vercel.app',
     },
   ];
 
