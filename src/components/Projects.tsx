@@ -230,17 +230,6 @@ export default function Projects() {
                           className="w-[200%] h-[200%] transform scale-50 origin-top-left border-0 select-none pointer-events-auto"
                           loading="lazy"
                         />
-                        <div className="absolute bottom-3 right-3 z-30 flex items-center gap-2">
-                          <a
-                            href={activeProject.previewUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-1.5 rounded-lg bg-accent text-surface px-3.5 py-1.5 font-mono text-xs font-semibold shadow-md hover:opacity-90 transition-opacity"
-                          >
-                            <ExternalLink className="size-3.5" />
-                            Open Live Site
-                          </a>
-                        </div>
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center h-full p-6 text-center">
@@ -270,7 +259,7 @@ export default function Projects() {
                             className="inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-surface text-ink hover:border-accent hover:text-accent font-mono text-xs font-medium h-9 px-3.5 transition-colors shadow-sm"
                             title="GitHub Repository"
                           >
-                            <CodeXml className="size-4" />
+                            <CodeXml className="size-4 text-muted group-hover:text-accent" />
                             <span>Code</span>
                           </a>
                         )}
@@ -279,10 +268,10 @@ export default function Projects() {
                             href={activeProject.live}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent text-surface hover:opacity-90 font-mono text-xs font-semibold h-9 px-3.5 transition-opacity shadow-sm"
+                            className="inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-surface hover:bg-accent-tint/60 text-ink hover:border-accent hover:text-accent font-mono text-xs font-semibold h-9 px-3.5 transition-all shadow-sm"
                             title="Live Deployment"
                           >
-                            <ExternalLink className="size-4" />
+                            <ExternalLink className="size-4 text-accent" />
                             <span>Live Demo</span>
                           </a>
                         )}
@@ -395,17 +384,6 @@ export default function Projects() {
                               className="w-[200%] h-[200%] transform scale-50 origin-top-left border-0 select-none pointer-events-none"
                               loading="lazy"
                             />
-                            <div className="absolute bottom-2.5 right-2.5 z-20">
-                              <a
-                                href={project.previewUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-1 rounded bg-accent text-surface px-2.5 py-1 font-mono text-[11px] font-semibold shadow-sm"
-                              >
-                                <ExternalLink className="size-3" />
-                                Visit Live
-                              </a>
-                            </div>
                           </div>
                         </div>
                       )}
@@ -445,9 +423,9 @@ export default function Projects() {
                             href={project.live}
                             target="_blank"
                             rel="noreferrer"
-                            className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-accent text-surface hover:opacity-90 font-mono text-xs font-semibold h-9 px-3 transition-opacity"
+                            className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-surface hover:bg-accent-tint/60 text-ink hover:border-accent hover:text-accent font-mono text-xs font-semibold h-9 px-3 transition-all shadow-sm"
                           >
-                            <ExternalLink className="size-3.5" />
+                            <ExternalLink className="size-3.5 text-accent" />
                             <span>Live Demo</span>
                           </a>
                         )}

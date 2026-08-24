@@ -66,10 +66,11 @@ export default function BuildTogether() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
             href="mailto:akanksharaina04@gmail.com"
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent bg-ink text-canvas hover:bg-accent h-11 px-5"
+            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent bg-black text-white hover:bg-neutral-800 h-11 px-5"
+            style={{ color: '#ffffff', backgroundColor: '#000000' }}
           >
-            <Mail className="size-4" />
-            Email me
+            <Mail className="size-4" style={{ color: '#ffffff' }} />
+            <span style={{ color: '#ffffff' }}>Email me</span>
           </a>
 
           <a

@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #f8fafc;
-  --surface: #ffffff;
-  --hairline: #cbd5e1;
-  --ink: #0f172a;
+  --canvas: #ffffff;
+  --surface: #f8fafc;
+  --hairline: #e2e8f0;
+  --ink: #000000;
   --muted: #334155;
-  --accent: #0284c7;
-  --accent-tint: #e0f2fe;
+  --accent: #000000;
+  --accent-tint: #f1f5f9;
 }
 
 .dark {
@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background: linear-gradient(180deg, var(--accent-tint) 0%, rgba(224, 242, 254, 0.4) 24rem, var(--canvas) 48rem), var(--canvas);
+  background: var(--canvas);
   color: var(--ink);
   min-height: 100vh;
   position: relative;
