@@ -59,6 +59,16 @@ export default function Projects() {
       previewUrl: 'https://neurohaven-pink.vercel.app',
     },
     {
+      name: 'Findify',
+      tagline: 'Job matching platform',
+      description:
+        'AI-powered job matching platform that helps job seekers and employers find the perfect match. Built with FastAPI and Gemini API for efficient and accurate matching.',
+      tech: ['React', 'TypeScript', 'FastAPI', 'PyPDF', 'Firebase', 'Gemini API'],
+      github: 'https://github.com/akkuraina/candidate-matcher.git',
+      live: 'https://findifyyy.vercel.app',
+      previewUrl: 'https://findifyyy.vercel.app',
+    },
+    {
       name: 'GigRadar',
       tagline: 'Local Artist & Underground Gig Finder',
       description:
@@ -132,7 +142,7 @@ export default function Projects() {
       {/* Desktop Split View (>= md) */}
       <div className="hidden md:grid md:grid-cols-12 gap-8 items-start">
         {/* Left Column: Minimal Project List (~33% width) */}
-        <div 
+        <div
           className="md:col-span-4 lg:col-span-4 flex flex-col gap-2"
           role="tablist"
           aria-label="Projects Explorer"
@@ -151,36 +161,31 @@ export default function Projects() {
                 onClick={() => setActiveIndex(index)}
                 onMouseEnter={() => setActiveIndex(index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
-                className={`group relative flex items-center justify-between rounded-xl px-4 py-3.5 text-left transition-all duration-200 cursor-pointer border ${
-                  isActive
-                    ? 'border-accent bg-surface shadow-md'
-                    : 'border-transparent hover:border-hairline hover:bg-surface/50 text-muted'
-                }`}
+                className={`group relative flex items-center justify-between rounded-xl px-4 py-3.5 text-left transition-all duration-200 cursor-pointer border ${isActive
+                  ? 'border-accent bg-surface shadow-md'
+                  : 'border-transparent hover:border-hairline hover:bg-surface/50 text-muted'
+                  }`}
               >
                 {/* Active Indicator Bar */}
-                <div 
-                  className={`absolute left-0 top-2.5 bottom-2.5 w-1 rounded-r-full transition-all duration-200 ${
-                    isActive ? 'bg-accent opacity-100 scale-y-100' : 'bg-transparent opacity-0 scale-y-0'
-                  }`} 
+                <div
+                  className={`absolute left-0 top-2.5 bottom-2.5 w-1 rounded-r-full transition-all duration-200 ${isActive ? 'bg-accent opacity-100 scale-y-100' : 'bg-transparent opacity-0 scale-y-0'
+                    }`}
                 />
 
                 <div className="flex items-center gap-3 pl-1">
-                  <span className={`font-mono text-xs transition-colors duration-200 ${
-                    isActive ? 'text-accent font-semibold' : 'text-muted/60 group-hover:text-muted'
-                  }`}>
+                  <span className={`font-mono text-xs transition-colors duration-200 ${isActive ? 'text-accent font-semibold' : 'text-muted/60 group-hover:text-muted'
+                    }`}>
                     0{index + 1}
                   </span>
-                  <span className={`font-serif text-lg tracking-tight transition-colors duration-200 ${
-                    isActive ? 'text-ink font-bold' : 'text-muted group-hover:text-ink font-normal'
-                  }`}>
+                  <span className={`font-serif text-lg tracking-tight transition-colors duration-200 ${isActive ? 'text-ink font-bold' : 'text-muted group-hover:text-ink font-normal'
+                    }`}>
                     {project.name}
                   </span>
                 </div>
 
-                <ChevronRight 
-                  className={`size-4 transition-transform duration-200 ${
-                    isActive ? 'text-accent translate-x-0 opacity-100' : '-translate-x-2 opacity-0 text-muted group-hover:opacity-40'
-                  }`} 
+                <ChevronRight
+                  className={`size-4 transition-transform duration-200 ${isActive ? 'text-accent translate-x-0 opacity-100' : '-translate-x-2 opacity-0 text-muted group-hover:opacity-40'
+                    }`}
                 />
               </button>
             );
@@ -317,11 +322,10 @@ export default function Projects() {
           return (
             <div
               key={project.name}
-              className={`overflow-hidden rounded-xl border transition-all duration-200 ${
-                isOpen
-                  ? 'border-accent bg-surface shadow-md'
-                  : 'border-hairline bg-surface/70'
-              }`}
+              className={`overflow-hidden rounded-xl border transition-all duration-200 ${isOpen
+                ? 'border-accent bg-surface shadow-md'
+                : 'border-hairline bg-surface/70'
+                }`}
             >
               {/* Accordion Header */}
               <button
@@ -331,15 +335,13 @@ export default function Projects() {
                 className="flex w-full items-center justify-between p-4 text-left cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <span className={`font-mono text-xs font-semibold ${
-                    isOpen ? 'text-accent' : 'text-muted/60'
-                  }`}>
+                  <span className={`font-mono text-xs font-semibold ${isOpen ? 'text-accent' : 'text-muted/60'
+                    }`}>
                     0{index + 1}
                   </span>
                   <div>
-                    <h3 className={`font-serif text-lg font-bold ${
-                      isOpen ? 'text-ink' : 'text-muted'
-                    }`}>
+                    <h3 className={`font-serif text-lg font-bold ${isOpen ? 'text-ink' : 'text-muted'
+                      }`}>
                       {project.name}
                     </h3>
                     <p className="font-mono text-[11px] uppercase tracking-wider text-accent mt-0.5">
@@ -349,9 +351,8 @@ export default function Projects() {
                 </div>
 
                 <ChevronRight
-                  className={`size-5 text-accent shrink-0 transition-transform duration-200 ${
-                    isOpen ? 'rotate-90' : 'rotate-0'
-                  }`}
+                  className={`size-5 text-accent shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-90' : 'rotate-0'
+                    }`}
                 />
               </button>
 
