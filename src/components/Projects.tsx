@@ -9,6 +9,16 @@ export default function Projects() {
 
   const projects = [
     {
+      name: 'Mergo',
+      tagline: 'Conflict-free collaborative document editor & CRDT engine',
+      description:
+        'High-performance real-time collaborative text editor built with Replicated Growable Array (RGA) CRDT for conflict-free multi-user synchronization, presence awareness, point-in-time version history snapshots, multi-page document layout, and Clerk authentication.',
+      tech: ['Next.js 16', 'React 19', 'TypeScript', 'Supabase', 'Tiptap', 'CRDT / RGA', 'Clerk', 'TailwindCSS'],
+      github: 'https://github.com/akkuraina/mergo',
+      live: 'https://mergo-sand.vercel.app',
+      previewUrl: 'https://mergo-sand.vercel.app',
+    },
+    {
       name: 'TruePath',
       tagline: 'Event-sourced financial ledger & CQRS projections',
       description:
@@ -27,16 +37,6 @@ export default function Projects() {
       github: 'https://github.com/akkuraina/git-happens',
       live: 'https://flagzilla.vercel.app',
       previewUrl: 'https://flagzilla.vercel.app',
-    },
-    {
-      name: 'Tranceformission',
-      tagline: 'Multi-tenant coaching & booking platform',
-      description:
-        'Scalable 3-app ecosystem (Coach Portal, Learner Discovery, Admin Console) featuring Neon Serverless PostgreSQL connection pooling, pluggable S3/Appwrite storage adapter, and Better Auth RBAC.',
-      tech: ['Next.js 16', 'React 19', 'TypeScript', 'Neon Postgres', 'AWS S3', 'Better Auth', 'TailwindCSS v4'],
-      github: 'https://github.com/akkuraina',
-      live: 'https://www.tranceformissioncoaches.com',
-      previewUrl: 'https://www.tranceformissioncoaches.com',
     },
     {
       name: 'YapMonster',
