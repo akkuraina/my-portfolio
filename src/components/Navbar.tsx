@@ -3,10 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
-import { CodeXml, Contact, Menu, X, FileText, ChevronRight } from 'lucide-react';
+import CommandPalette from './CommandPalette';
+import { Menu, X, FileText, ChevronRight, Search } from 'lucide-react';
+import { sections, site } from '../data/site';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [shortcut, setShortcut] = useState('Ctrl K');
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -20,27 +24,39 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = [
-    { label: 'About', href: '/#about' },
-    { label: 'Work', href: '/#experience' },
-    { label: 'Projects', href: '/#projects' },
-    { label: 'Skills', href: '/#skills' },
-    { label: 'Build', href: '/#build' },
-  ];
+  // ⌘K / Ctrl+K, or "/" outside text fields, opens search.
+  useEffect(() => {
+    if (/Mac|iPhone|iPad/.test(navigator.userAgent)) setShortcut('⌘K');
+    const onKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      const typing = target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setMobileMenuOpen(false);
+        setSearchOpen((open) => !open);
+      } else if (e.key === '/' && !typing) {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  const navLinks = sections.map((s) => ({ label: s.label, href: `/#${s.id}` }));
 
   return (
     <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/90 backdrop-blur-md transition-colors duration-300">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6" aria-label="Primary">
-        {/* Home Link (Replaces AR) */}
-        <Link 
-          href="/#top" 
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-6" aria-label="Primary">
+        <Link
+          href="/#top"
           className="font-serif text-xl font-bold tracking-tight text-ink hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
           Home
         </Link>
 
         {/* Desktop Nav Links */}
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -55,51 +71,52 @@ export default function Navbar() {
         </div>
 
         {/* Right Actions (Desktop) */}
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search the site"
+            aria-keyshortcuts="Control+K Meta+K"
+            className="inline-flex h-9 w-44 items-center gap-2 rounded-md border border-hairline bg-surface/70 px-3 text-sm text-muted transition-colors hover:border-accent hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent cursor-pointer"
+          >
+            <Search className="size-4 text-accent" />
+            <span>Search…</span>
+            <kbd className="ml-auto rounded border border-hairline px-1.5 py-0.5 font-mono text-[10px]">{shortcut}</kbd>
+          </button>
+
           <a
-            href="/resume.pdf"
+            href={site.resume}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50 border border-hairline bg-transparent text-ink hover:border-accent hover:text-accent h-9 px-3"
+            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent border border-hairline bg-transparent text-ink hover:border-accent hover:text-accent h-9 px-3"
           >
             <FileText className="size-4" />
             Resume
           </a>
 
           <ThemeToggle />
-
-          {/* GitHub Social Icon */}
-          <a
-            href="https://github.com/akkuraina"
-            aria-label="GitHub"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50 text-muted hover:bg-accent-tint hover:text-ink size-10 px-0 relative overflow-hidden group"
-            title="GitHub"
-          >
-            <CodeXml className="relative z-10 size-4" />
-          </a>
-
-          {/* LinkedIn Social Icon */}
-          <a
-            href="https://www.linkedin.com/in/akanksha-raina-4637b5268/"
-            aria-label="LinkedIn"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50 text-muted hover:bg-accent-tint hover:text-ink size-10 px-0 relative overflow-hidden group"
-            title="LinkedIn"
-          >
-            <Contact className="relative z-10 size-4" />
-          </a>
         </div>
 
-        {/* Mobile menu toggle button */}
-        <div className="flex items-center gap-2 md:hidden">
+        {/* Compact actions (< lg) */}
+        <div className="flex items-center gap-1 lg:hidden">
+          <button
+            type="button"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setSearchOpen(true);
+            }}
+            aria-label="Search the site"
+            className="inline-flex size-10 items-center justify-center rounded-md text-muted transition-colors hover:bg-accent-tint hover:text-ink"
+          >
+            <Search className="size-4" />
+          </button>
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex items-center justify-center rounded-lg border border-hairline bg-surface p-2 text-ink transition-colors hover:border-accent hover:text-accent size-10 focus:outline-none"
+            className="ml-1 inline-flex items-center justify-center rounded-lg border border-hairline bg-surface p-2 text-ink transition-colors hover:border-accent hover:text-accent size-10 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -109,14 +126,15 @@ export default function Navbar() {
       {/* Mobile Backdrop & Drawer */}
       {mobileMenuOpen && (
         <>
-          {/* Solid Full-Screen Backdrop Overlay */}
-          <div 
-            className="fixed inset-0 top-16 z-40 bg-canvas opacity-100 md:hidden" 
+          <div
+            className="fixed inset-0 top-16 z-40 bg-canvas opacity-100 lg:hidden"
             onClick={() => setMobileMenuOpen(false)}
           />
 
-          {/* Solid Opaque Drawer */}
-          <div className="absolute top-full left-0 right-0 z-50 flex flex-col gap-4 border-b-2 border-hairline bg-canvas p-6 md:hidden shadow-2xl max-h-[calc(100dvh-4rem)] overflow-y-auto text-ink">
+          <div
+            id="mobile-menu"
+            className="absolute top-full left-0 right-0 z-50 flex flex-col gap-4 border-b-2 border-hairline bg-canvas p-6 lg:hidden shadow-2xl max-h-[calc(100dvh-4rem)] overflow-y-auto text-ink"
+          >
             <div className="flex flex-col gap-2.5">
               <p className="font-mono text-xs font-semibold uppercase tracking-wider text-accent mb-1 px-1">Navigation</p>
               {navLinks.map((link) => (
@@ -132,9 +150,9 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="flex flex-col gap-3 pt-4 border-t border-hairline">
+            <div className="pt-4 border-t border-hairline">
               <a
-                href="/resume.pdf"
+                href={site.resume}
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
@@ -143,33 +161,12 @@ export default function Navbar() {
                 <FileText className="size-4" />
                 View Resume
               </a>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <a
-                  href="https://github.com/akkuraina"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface px-3 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
-                >
-                  <CodeXml className="size-4" />
-                  GitHub
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/akanksha-raina-4637b5268/"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface px-3 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
-                >
-                  <Contact className="size-4" />
-                  LinkedIn
-                </a>
-              </div>
             </div>
           </div>
         </>
       )}
+
+      <CommandPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }
