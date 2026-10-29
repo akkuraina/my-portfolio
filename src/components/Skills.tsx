@@ -29,32 +29,6 @@ const itemVariants: Variants = {
   },
 };
 
-// "Next.js 16" -> "next.js", so project tags match skill names regardless of version.
-const normalize = (s: string) => s.toLowerCase().replace(/\s+\d+(\.\d+)*$/, '').trim();
-
-function projectsUsing(group: SkillGroup) {
-  const names = new Set(group.skills.flatMap((s) => [s.name, ...(s.aliases ?? [])]).map(normalize));
-  return projects.filter((p) => p.builtWith.some((t) => names.has(normalize(t))));
-}
-
-function UsedIn({ group }: { group: SkillGroup }) {
-  const used = projectsUsing(group);
-  if (used.length === 0) return null;
-  return (
-    <p className="mt-5 border-t border-hairline/60 pt-3 font-mono text-[11px] text-muted">
-      <span className="uppercase tracking-wider text-muted/70">Used in </span>
-      {used.map((p, i) => (
-        <span key={p.slug}>
-          {i > 0 && <span aria-hidden="true"> · </span>}
-          <a href={`#project-${p.slug}`} className="hover:text-accent hover:underline">
-            {p.name}
-          </a>
-        </span>
-      ))}
-    </p>
-  );
-}
-
 function SkillChips({ group, size = 'md' }: { group: SkillGroup; size?: 'sm' | 'md' }) {
   return (
     <ul className={`flex flex-wrap ${size === 'sm' ? 'gap-1.5' : 'gap-2'}`}>
@@ -129,10 +103,9 @@ export default function Skills() {
             }`}
           >
             <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-accent">{group.title}</h3>
-            <div className="mt-4 flex-1">
+            <div className="mt-4">
               <SkillChips group={group} />
             </div>
-            <UsedIn group={group} />
           </motion.article>
         ))}
       </div>
@@ -176,7 +149,6 @@ export default function Skills() {
                   >
                     <div className="border-t border-hairline/60 px-4 pb-4 pt-3">
                       <SkillChips group={group} size="sm" />
-                      <UsedIn group={group} />
                     </div>
                   </motion.div>
                 )}

@@ -1,10 +1,7 @@
 // Skill groups for components/Skills.tsx, strongest group first.
-// `aliases` are the names a skill appears under in data/projects.ts
-// `builtWith`, used to compute the "Used in" line for each group.
 
 export type Skill = {
   name: string;
-  aliases?: string[];
 };
 
 export type SkillGroup = {
@@ -18,9 +15,9 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: 'Next.js' },
       { name: 'React' },
-      { name: 'Tailwind CSS', aliases: ['TailwindCSS'] },
+      { name: 'Tailwind CSS' },
       { name: 'Tiptap' },
-      { name: 'Three.js / R3F', aliases: ['Three.js', 'React Three Fiber'] },
+      { name: 'Three.js / R3F' },
       { name: 'Framer Motion' },
     ],
   },
@@ -30,7 +27,7 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Node.js' },
       { name: 'Express.js' },
       { name: 'FastAPI' },
-      { name: 'WebSockets / Socket.IO', aliases: ['WebSockets', 'Socket.IO'] },
+      { name: 'WebSockets / Socket.IO' },
       { name: 'BullMQ' },
     ],
   },
@@ -64,7 +61,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'AI/ML',
     skills: [
-      { name: 'LLM APIs (OpenAI, Anthropic, Gemini)', aliases: ['Gemini API'] },
+      { name: 'LLM APIs (OpenAI, Anthropic, Gemini)' },
       { name: 'MCP' },
       { name: 'NLP' },
       { name: 'Text Embeddings' },
