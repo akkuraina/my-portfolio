@@ -1,0 +1,104 @@
+// Skill groups for components/Skills.tsx, strongest group first.
+// `aliases` are the names a skill appears under in data/projects.ts
+// `builtWith`, used to compute the "Used in" line for each group.
+
+export type Skill = {
+  name: string;
+  aliases?: string[];
+};
+
+export type SkillGroup = {
+  title: string;
+  skills: Skill[];
+};
+
+export const skillGroups: SkillGroup[] = [
+  {
+    title: 'Web',
+    skills: [
+      { name: 'Next.js' },
+      { name: 'React' },
+      { name: 'Tailwind CSS', aliases: ['TailwindCSS'] },
+      { name: 'Tiptap' },
+      { name: 'Three.js / R3F', aliases: ['Three.js', 'React Three Fiber'] },
+      { name: 'Framer Motion' },
+    ],
+  },
+  {
+    title: 'Backend & Realtime',
+    skills: [
+      { name: 'Node.js' },
+      { name: 'Express.js' },
+      { name: 'FastAPI' },
+      { name: 'WebSockets / Socket.IO', aliases: ['WebSockets', 'Socket.IO'] },
+      { name: 'BullMQ' },
+    ],
+  },
+  {
+    title: 'Data',
+    skills: [
+      { name: 'PostgreSQL' },
+      { name: 'MongoDB' },
+      { name: 'Redis' },
+      { name: 'Prisma' },
+      { name: 'Drizzle' },
+      { name: 'Neon' },
+      { name: 'Supabase' },
+      { name: 'Firebase' },
+      { name: 'MySQL' },
+      { name: 'SQLite' },
+    ],
+  },
+  {
+    title: 'Languages',
+    skills: [
+      { name: 'TypeScript' },
+      { name: 'Go' },
+      { name: 'JavaScript' },
+      { name: 'Python' },
+      { name: 'SQL' },
+      { name: 'Java' },
+      { name: 'C/C++' },
+    ],
+  },
+  {
+    title: 'AI/ML',
+    skills: [
+      { name: 'LLM APIs (OpenAI, Anthropic, Gemini)', aliases: ['Gemini API'] },
+      { name: 'MCP' },
+      { name: 'NLP' },
+      { name: 'Text Embeddings' },
+      { name: 'Information Retrieval (TF-IDF, cosine similarity)' },
+      { name: 'scikit-learn' },
+      { name: 'Pandas' },
+      { name: 'NumPy' },
+    ],
+  },
+  {
+    title: 'Infra & Tools',
+    skills: [
+      { name: 'Google Cloud' },
+      { name: 'AWS' },
+      { name: 'Docker' },
+      { name: 'Vercel' },
+      { name: 'Render' },
+      { name: 'Upstash' },
+      { name: 'Git' },
+      { name: 'Bun' },
+      { name: 'Clerk' },
+      { name: 'Better Auth' },
+      { name: 'Appwrite' },
+      { name: 'Cloudinary' },
+      { name: 'Cloudflare R2' },
+    ],
+  },
+];
+
+// Architecture patterns, each linked to the project that implements it.
+export const patterns: { name: string; project: string }[] = [
+  { name: 'CRDT (RGA) sync', project: 'mergo' },
+  { name: 'Event sourcing + CQRS', project: 'truepath' },
+  { name: 'Background job queues', project: 'truepath' },
+  { name: 'Authoritative game server', project: 'flagzilla' },
+  { name: 'Room-based pub/sub', project: 'yapmonster' },
+];
