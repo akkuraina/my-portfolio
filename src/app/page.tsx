@@ -17,7 +17,11 @@ const Skills = dynamic(() => import('../components/Skills'), {
   ssr: true,
 });
 
-const BuildTogether = dynamic(() => import('../components/BuildTogether'), {
+const Research = dynamic(() => import('../components/Research'), {
+  ssr: true,
+});
+
+const Contact = dynamic(() => import('../components/Contact'), {
   ssr: true,
 });
 
@@ -33,7 +37,8 @@ export default function Home() {
       <Experience />
       <Projects />
       <Skills />
-      <BuildTogether />
+      <Research />
+      <Contact />
       <Footer />
     </main>
   );

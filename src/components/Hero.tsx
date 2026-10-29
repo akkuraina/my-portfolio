@@ -1,6 +1,7 @@
 'use client';
 
 import { Mail, FileText, CodeXml, Contact } from 'lucide-react';
+import { site } from '../data/site';
 
 export default function Hero() {
   return (
@@ -42,14 +43,14 @@ export default function Hero() {
         {/* Action Buttons */}
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
-            href="mailto:akanksharaina04@gmail.com"
+            href={`mailto:${site.email}`}
             className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent bg-ink text-canvas hover:bg-accent h-11 px-5"
           >
             <Mail className="size-4" />
             Email me
           </a>
           <a
-            href="/resume.pdf"
+            href={site.resume}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent border border-hairline bg-transparent text-ink hover:border-accent hover:text-accent h-11 px-5"
@@ -62,7 +63,7 @@ export default function Hero() {
         {/* Social Icons & Location */}
         <div className="mt-7 flex items-center gap-2 text-muted">
           <a
-            href="https://github.com/akkuraina"
+            href={site.github}
             aria-label="GitHub"
             target="_blank"
             rel="noreferrer"
@@ -72,7 +73,7 @@ export default function Hero() {
             <CodeXml className="size-4" />
           </a>
           <a
-            href="https://www.linkedin.com/in/akanksha-raina-4637b5268/"
+            href={site.linkedin}
             aria-label="LinkedIn"
             target="_blank"
             rel="noreferrer"

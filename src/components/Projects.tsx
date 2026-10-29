@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { CodeXml, ExternalLink, Globe, MonitorPlay, ChevronRight, ArrowRight, ArrowDown } from 'lucide-react';
 import { projects, type Project, type Architecture } from '../data/projects';
-import { isTodo, isVisible } from '../lib/todo';
+import { isVisible } from '../lib/todo';
+import Copy from './Copy';
 
 type SectionId = 'overview' | 'architecture' | 'decisions' | 'hard';
 
@@ -22,19 +23,6 @@ function sectionsFor(project: Project): SectionId[] {
   if (project.decisions?.some((d) => isVisible(d.title) && isVisible(d.why))) sections.push('decisions');
   if (project.hard?.some((h) => isVisible(h.challenge) && isVisible(h.approach))) sections.push('hard');
   return sections;
-}
-
-// Renders a content string, or a dashed TODO badge in dev (nothing in production).
-function Copy({ value, className = '' }: { value?: string; className?: string }) {
-  if (!isVisible(value)) return null;
-  if (isTodo(value)) {
-    return (
-      <span className="block rounded-md border border-dashed border-amber-500/70 bg-amber-500/5 px-3 py-2 font-mono text-xs text-amber-600">
-        {value}
-      </span>
-    );
-  }
-  return <span className={className}>{value}</span>;
 }
 
 function Label({ children }: { children: React.ReactNode }) {
