@@ -51,7 +51,20 @@ export default function Experience() {
 
   const experiences = [
     {
-      dates: 'July 2026 – Present',
+      dates: 'October 2026 – Present',
+      role: 'Product Engineering Intern',
+      company: 'Tenet',
+      location: 'Texas, USA',
+      mode: 'Remote',
+      bullets: [
+        'Developing backend services and product features for an AI-powered voice-agent platform using Go and TypeScript, contributing to the inference proxy, control-plane APIs, and the React-based review studio.',
+        'Automating base-model integration workflows, streamlining model configuration, registration, and inference routing so new models can be onboarded, evaluated in simulation, and served with minimal manual setup.',
+        'Working with Redis, PostgreSQL (Neon), Cloudflare R2, and Google Cloud Secret Manager across isolated development and production environments to support reliable, environment-specific model and adapter serving.',
+      ],
+      tech: ['Go', 'TypeScript', 'React', 'Redis', 'PostgreSQL (Neon)', 'Cloudflare R2', 'Google Cloud'],
+    },
+    {
+      dates: 'July 2026 – October 2026',
       role: 'Fullstack Developer Intern',
       company: 'Sugamaya Governance LLP',
       location: 'Malad West, Mumbai',
