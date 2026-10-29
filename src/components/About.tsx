@@ -88,7 +88,7 @@ export default function About() {
         {/* Left Column: Narrative Paragraphs (Independent Scroll Reveals) */}
         <div className="lg:col-span-7 flex flex-col gap-5 text-base leading-relaxed text-muted sm:text-lg">
           <motion.p variants={itemVariants}>
-            I&apos;m a full-stack and mobile developer who doesn&apos;t stay in one lane: web, mobile, backend, and AI-integrated systems, all in the same week. Currently studying Electronics &amp; Telecommunication with Honors in
+            I&apos;m a full-stack developer who doesn&apos;t stay in one lane: frontend, backend, and AI-integrated systems, all in the same week. Currently studying Electronics &amp; Telecommunication with Honors in
             <TechChip>AI/ML</TechChip>
             at Dwarkadas J. Sanghvi College of Engineering, Mumbai.
           </motion.p>
@@ -96,9 +96,7 @@ export default function About() {
           <motion.p variants={itemVariants}>
             Most days that means moving between
             <TechChip>React/Next.js</TechChip>
-            interfaces,
-            <TechChip>React Native</TechChip>
-            apps, and the infrastructure underneath:
+            interfaces and the infrastructure underneath them:
             <TechChip>schemas</TechChip>,
             <TechChip>APIs</TechChip>,
             and the production bugs nobody warns you about.
@@ -132,9 +130,9 @@ export default function About() {
 
               <div className="pl-3 border-l-2 border-accent/40 space-y-2.5 text-xs sm:text-[13px]">
                 <p className="font-serif text-base font-bold text-ink tracking-wide">&gt; Akanksha Raina</p>
-                <p className="text-muted">&gt; Full-stack &amp; Mobile Engineer</p>
+                <p className="text-muted">&gt; Full-stack Engineer</p>
                 <p className="text-muted">&gt; B.Tech, ECE (AI/ML Honors) — DJSCE</p>
-                <p className="text-muted">&gt; Focus: Web · Mobile · AI Systems</p>
+                <p className="text-muted">&gt; Focus: Web · Backend · AI Systems</p>
                 <div className="flex items-center gap-2 pt-1">
                   <span className="text-muted">&gt; Status:</span>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">

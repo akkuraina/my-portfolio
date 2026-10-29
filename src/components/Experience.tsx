@@ -57,12 +57,12 @@ export default function Experience() {
       location: 'Malad West, Mumbai',
       mode: 'On-site',
       bullets: [
-        'Worked across web development, mobile development, and backend architecture on multiple concurrent client and in-house products, translating product requirements into shipped features end-to-end.',
+        'Worked across web development and backend architecture on multiple concurrent client and in-house products, translating product requirements into shipped features end-to-end.',
         'Built and iterated on the company\'s in-house collaborative platforms, contributing UI enhancements, API integrations, and performance improvements to core workflows.',
-        'Designed and maintained backend services and database schemas, ensuring reliable data flow between mobile, web, and server layers.',
+        'Designed and maintained backend services and database schemas, ensuring reliable data flow between the web and server layers.',
         'Collaborated with cross-functional teams to debug production issues, optimize deployment pipelines, and improve overall system reliability.',
       ],
-      tech: ['Next.js', 'React Native', 'TypeScript', 'PostgreSQL', 'Node.js'],
+      tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Node.js'],
     },
     {
       dates: 'June 2025 – August 2025',

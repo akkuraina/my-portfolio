@@ -25,7 +25,7 @@ const geistMono = JetBrains_Mono({
 
 export const metadata = {
   title: 'Akanksha Raina | Full-Stack Developer & SDE',
-  description: 'Full-stack and mobile developer working across web, mobile, and AI-integrated systems.',
+  description: 'Full-stack developer building web products, backend systems, and AI-integrated applications.',
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -52,4 +52,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+}
