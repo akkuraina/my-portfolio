@@ -2,7 +2,7 @@
 // badge in `npm run dev` and hidden in production builds, so unfinished copy
 // never reaches the live site.
 
-export const showTodos = process.env.NODE_ENV !== 'production';
+const showTodos = process.env.NODE_ENV !== 'production';
 
 export function isTodo(value?: string): boolean {
   return typeof value === 'string' && value.trim().startsWith('TODO');
