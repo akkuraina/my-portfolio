@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Akanksha Raina — Portfolio
 
-## Getting Started
+Personal portfolio of Akanksha Raina, full-stack engineer. Live at **[akanksharaina.vercel.app](https://akanksharaina.vercel.app/)**.
 
-First, run the development server:
+A single-page site with a 3D landing, an experience timeline, an interactive project explorer, and research and certifications. All content lives in typed data files, so most updates never touch a component.
+
+## What's on the page
+
+| Section | What it does |
+| --- | --- |
+| **Landing** | Full-screen three.js scene of floating, toon-shaded dev objects behind a mixed-font "AKANKSHA RAINA". It's sticky, and the rest of the site slides up over it on a curved panel. |
+| **About** | Role statement, what I'm working on now, email/resume buttons, and social links. |
+| **Experience** | A vine that draws itself as you scroll. Each role is a flip card: company and stack on the front, what I did on the back. |
+| **Projects** | Explorer with a live-preview browser frame plus Overview, Architecture and Key decisions tabs. On mobile it becomes an accordion. |
+| **Skills** | Skills grouped by domain, strongest group first. |
+| **Research** | The IJIRT publication and course certificates, linking to the certificate images. |
+| **Contact** | Email (with click-to-copy), resume, GitHub, LinkedIn and X. |
+
+There's also a first-load loader, a light/dark theme toggle, and a navbar that stays hidden over the landing and slides in once you scroll past it.
+
+## Stack
+
+- **Next.js 14** (App Router) with **React 18** and **TypeScript**
+- **Tailwind CSS v4**, with theme colours defined as CSS variables in `src/app/globals.css`
+- **three.js** + **@react-three/fiber** for the landing scene
+- **framer-motion** for scroll and flip animations
+- **lucide-react** icons
+- Fonts via `next/font`: Fraunces (headings), Inter (body), JetBrains Mono (labels), plus display faces for the landing name
+
+## Getting started
+
+Requires Node.js 18.17 or newer.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Other commands:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build      # production build
+npm start          # serve the production build
+npx tsc --noEmit   # type-check
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The dev server writes to `.next-dev/` and production builds write to `.next/` (see `next.config.js`). That means you can run a build while `npm run dev` is open without crashing the dev server.
 
-## Learn More
+## Editing content
 
-To learn more about Next.js, take a look at the following resources:
+Almost everything is data in `src/data/`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| File | Contents |
+| --- | --- |
+| `site.ts` | Name, email, resume path, social links, and the nav sections |
+| `experience.ts` | Internships, newest first: dates, role, location, bullets, tech, website, certificate |
+| `projects.ts` | Projects: tagline, problem, outcome, tech row, architecture layers, key decisions, links, preview URL |
+| `skills.ts` | Skill groups, strongest first |
+| `credentials.ts` | Publications and certifications |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Guidelines:
 
-## Deploy on Vercel
+- **Projects:** one line each for problem and outcome, at most two key decisions. Keep `builtWith` to a single row, and leave out anything another item implies (Express implies Node.js, Next.js implies React).
+- **Optional sections:** a project with no `architecture` or `decisions` simply hides that tab.
+- **Placeholders:** any string starting with `TODO` shows as an amber badge in `npm run dev` and is hidden in production builds (`src/lib/todo.ts`). Unfinished copy never ships.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Images and files
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Put files in `public/` and reference them from the data files by path, for example `certificate: '/naval.jpg'`. The resume is served from `public/resume.pdf`.
+
+## Project structure
+
+```
+src/
+  app/
+    layout.tsx          fonts, theme script, loader, background, navbar
+    page.tsx            landing + curved content panel
+    globals.css         theme tokens (light/dark), animations
+  components/
+    landing/            3D landing (Landing, LandingScene, palettes)
+    Hero.tsx            About section
+    Experience.tsx      vine timeline + flip cards
+    Projects.tsx        project explorer
+    Skills.tsx, Research.tsx, Contact.tsx
+    Navbar.tsx, Loader.tsx, PopBackground.tsx, ThemeProvider.tsx, ...
+  data/                 all site content (see above)
+  lib/todo.ts           TODO-placeholder helpers
+public/                 resume, certificate and publication images
+```
+
+## Theming
+
+Colours are CSS variables on `:root` (light) and `.dark` in `globals.css`, exposed to Tailwind through `@theme`. Utilities like `bg-accent/10` and `text-muted` follow the active theme, and `dark:` variants follow the toggle, not the OS setting. The landing scene takes its colours from `src/components/landing/palettes.ts`.
+
+## Performance and accessibility
+
+- three.js is loaded only on the client, after first paint, so it stays out of the initial bundle. The scene stops rendering once it's covered or the tab is hidden, and uses fewer objects at a lower resolution on phones.
+- The saved theme is applied before first paint, so the page never flashes the wrong theme.
+- **Reduced motion:** animations, the vine drawing and smooth scrolling are disabled, and the 3D scene renders a single still frame.
+- **Keyboard support:** the project list uses arrow keys, Home and End. Experience cards flip with Enter or Space. The hidden navbar reappears when focused.
+
+## Deployment
+
+Deployed on Vercel as a standard Next.js app. No environment variables are required.
