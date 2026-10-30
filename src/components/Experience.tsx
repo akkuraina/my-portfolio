@@ -78,14 +78,14 @@ export default function Experience() {
       tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Node.js'],
     },
     {
-      dates: 'June 2025 – August 2025',
+      dates: 'June 2025 – July 2025',
       role: 'IT Intern',
       company: 'Tech Mahindra',
       location: 'Powai, Mumbai',
       mode: 'Hybrid',
       bullets: [
         'Engineered workflow in ServiceNow under ITIL4, eliminating manual intervention in enterprise ticketing systems.',
-        'Streamlined incident management for enterprise clients, driving a 20% increase in SLA compliance, and performed root-cause analysis to optimize processes and enhance operational efficiency.',
+        'Streamlined incident management for enterprise clients and performed root-cause analysis to optimize processes and improve SLA compliance.',
       ],
       tech: ['ServiceNow', 'ITIL4'],
     },
