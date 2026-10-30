@@ -90,12 +90,3 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
 ];
-
-// Architecture patterns, each linked to the project that implements it.
-export const patterns: { name: string; project: string }[] = [
-  { name: 'CRDT (RGA) sync', project: 'mergo' },
-  { name: 'Event sourcing + CQRS', project: 'truepath' },
-  { name: 'Background job queues', project: 'truepath' },
-  { name: 'Authoritative game server', project: 'flagzilla' },
-  { name: 'Room-based pub/sub', project: 'yapmonster' },
-];

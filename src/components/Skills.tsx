@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView, type Variants } from 'framer-motion';
-import { ChevronRight, ArrowUpRight } from 'lucide-react';
-import { skillGroups, patterns, type SkillGroup } from '../data/skills';
-import { projects } from '../data/projects';
+import { ChevronRight } from 'lucide-react';
+import { skillGroups, type SkillGroup } from '../data/skills';
 
 const ACCENTS = ['var(--accent)', 'var(--accent-2)', 'var(--accent-3)', 'var(--accent-4)'];
 
@@ -71,8 +70,6 @@ export default function Skills() {
     return () => clearInterval(interval);
   }, [isInView]);
 
-  const projectName = (slug: string) => projects.find((p) => p.slug === slug)?.name ?? slug;
-
   return (
     <motion.section
       ref={sectionRef}
@@ -89,7 +86,7 @@ export default function Skills() {
           <span>{typedTag}</span>
           <span className={`inline-block w-1.5 h-3.5 bg-accent ${typingComplete ? 'animate-cursor' : 'opacity-100'}`} />
         </div>
-        <h2 className="mt-3 font-serif text-3xl font-bold text-ink sm:text-4xl">
+        <h2 className="mt-3 font-serif text-3xl font-normal text-ink sm:text-4xl">
           The stack I build with.
         </h2>
       </motion.div>
@@ -163,29 +160,6 @@ export default function Skills() {
         })}
       </motion.div>
 
-      {/* Patterns shipped, each linked to its project */}
-      <motion.div
-        variants={itemVariants}
-        className="mt-6 rounded-lg border border-hairline bg-surface p-5 sm:p-6"
-      >
-        <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-accent">Patterns I&apos;ve shipped</h3>
-        <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {patterns.map((pattern) => (
-            <li key={pattern.name}>
-              <a
-                href={`#project-${pattern.project}`}
-                className="group flex items-center justify-between gap-3 rounded-md border border-hairline px-3 py-2.5 text-sm text-ink transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
-                <span>{pattern.name}</span>
-                <span className="flex shrink-0 items-center gap-1 font-mono text-[11px] text-muted group-hover:text-accent">
-                  {projectName(pattern.project)}
-                  <ArrowUpRight className="size-3.5" />
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </motion.div>
     </motion.section>
   );
 }
