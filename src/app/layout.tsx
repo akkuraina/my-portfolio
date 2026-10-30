@@ -2,7 +2,11 @@ import { Inter, Fraunces, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '../components/ThemeProvider';
 import Navbar from '../components/Navbar';
-import AmbientOceanBackground from '../components/AmbientOceanBackground';
+import PopBackground from '../components/PopBackground';
+import Loader from '../components/Loader';
+
+// Applies the saved theme before first paint so the page (and loader) never flash the wrong theme.
+const themeScript = `try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t!=='light')}catch(e){document.documentElement.classList.add('dark')}`;
 
 const inter = Inter({
   subsets: ['latin'],
@@ -25,11 +29,10 @@ const geistMono = JetBrains_Mono({
 
 export const metadata = {
   title: 'Akanksha Raina | Full-Stack Developer & SDE',
-  description: 'Full-stack and mobile developer working across web, mobile, and AI-integrated systems.',
+  description: 'Full-stack developer building web products, backend systems, and AI-integrated applications.',
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
     shortcut: '/icon.svg',
     apple: '/icon.svg',
@@ -42,14 +45,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="bg-canvas text-ink antialiased transition-colors duration-300">
+        <Loader />
         <ThemeProvider>
-          <AmbientOceanBackground />
+          <PopBackground />
           <Navbar />
           {children}
         </ThemeProvider>
       </body>
     </html>
   );
-}
+}

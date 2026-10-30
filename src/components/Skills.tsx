@@ -1,7 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView, type Variants } from 'framer-motion';
+import { motion, AnimatePresence, useInView, type Variants } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
+import { skillGroups, type SkillGroup } from '../data/skills';
+
+const ACCENTS = ['var(--accent)', 'var(--accent-2)', 'var(--accent-3)', 'var(--accent-4)'];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -26,11 +30,29 @@ const itemVariants: Variants = {
   },
 };
 
+function SkillChips({ group, size = 'md' }: { group: SkillGroup; size?: 'sm' | 'md' }) {
+  return (
+    <ul className={`flex flex-wrap ${size === 'sm' ? 'gap-1.5' : 'gap-2'}`}>
+      {group.skills.map((skill) => (
+        <li
+          key={skill.name}
+          className={`rounded-md border border-hairline font-mono text-muted ${
+            size === 'sm' ? 'px-2 py-0.5 text-[11px]' : 'px-2.5 py-1 text-xs'
+          }`}
+        >
+          {skill.name}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [typedTag, setTypedTag] = useState('');
   const [typingComplete, setTypingComplete] = useState(false);
+  const [openGroup, setOpenGroup] = useState(0);
 
   useEffect(() => {
     if (!isInView) return;
@@ -48,53 +70,13 @@ export default function Skills() {
     return () => clearInterval(interval);
   }, [isInView]);
 
-  const skillCategories = [
-    {
-      title: 'Languages',
-      skills: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C/C++', 'HTML', 'CSS', 'SQL'],
-    },
-    {
-      title: 'Frameworks',
-      skills: ['Next.js', 'React', 'React Native', 'Node.js', 'Express.js', 'Socket.IO', 'WebSockets'],
-    },
-    {
-      title: 'AI/ML',
-      skills: [
-        'Machine Learning',
-        'NLP',
-        'Text Embeddings',
-        'TF-IDF',
-        'Cosine Similarity',
-        'Information Retrieval',
-        'LLM APIs',
-        'Pandas',
-        'NumPy',
-        'Scikit-learn',
-      ],
-    },
-    {
-      title: 'Developer Tools',
-      skills: ['Git', 'GitHub', 'VS Code', 'Firebase', 'Supabase', 'Postman', 'DBeaver', 'Bun', 'Docker'],
-    },
-    {
-      title: 'Databases & Infra',
-      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQLite', 'Prisma', 'Redis', 'Cloudflare R2', 'Appwrite'],
-    },
-    {
-      title: 'UI Libraries',
-      skills: ['Chakra UI', 'Material UI', 'Watermelon UI', 'TailwindCSS', 'Three.js', 'Framer Motion'],
-    },
-  ];
-
-  const allSkills = skillCategories.flatMap((c) => c.skills);
-
   return (
     <motion.section
       ref={sectionRef}
       id="skills"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={containerVariants}
       className="mx-auto max-w-6xl px-5 py-20 sm:px-6"
     >
@@ -104,49 +86,80 @@ export default function Skills() {
           <span>{typedTag}</span>
           <span className={`inline-block w-1.5 h-3.5 bg-accent ${typingComplete ? 'animate-cursor' : 'opacity-100'}`} />
         </div>
-        <h2 className="mt-3 font-serif text-3xl font-bold text-ink sm:text-4xl">
+        <h2 className="mt-3 font-serif text-3xl font-normal text-ink sm:text-4xl">
           The stack I build with.
         </h2>
       </motion.div>
 
-      {/* Infinite Marquee Banner */}
-      <motion.div variants={itemVariants} className="mb-10 overflow-hidden border-y border-hairline py-3 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-        <div className="flex w-max animate-marquee gap-3 font-mono text-xs text-muted">
-          {allSkills.concat(allSkills).map((s, index) => (
-            <span
-              key={index}
-              className="rounded-md border border-hairline bg-surface px-3 py-1 text-muted"
-            >
-              {s}
-            </span>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Grid Columns */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {skillCategories.map((cat, index) => (
+      {/* Desktop / tablet grid (>= md): strongest group spans two columns */}
+      <div className="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
+        {skillGroups.map((group, index) => (
           <motion.article
-            key={index}
+            key={group.title}
             variants={itemVariants}
-            className="rounded-lg border border-hairline bg-surface p-6 shadow-[0_1px_0_rgba(28,27,25,0.04)] transition duration-300 hover:-translate-y-1 hover:border-accent"
+            style={{ borderTopColor: ACCENTS[index % ACCENTS.length] }}
+            className={`flex flex-col rounded-lg border border-t-2 border-hairline bg-surface p-6 shadow-[0_1px_0_rgba(28,27,25,0.04)] transition duration-300 hover:-translate-y-1 hover:border-accent ${
+              index === 0 ? 'md:col-span-2' : index === skillGroups.length - 1 ? 'lg:col-span-3' : ''
+            }`}
           >
-            <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
-              {cat.title}
+            <h3 className="font-mono text-xs uppercase tracking-[0.18em]" style={{ color: ACCENTS[index % ACCENTS.length] }}>
+              {group.title}
             </h3>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {cat.skills.map((skill, sIndex) => (
-                <span
-                  key={sIndex}
-                  className="rounded-md border border-hairline px-2.5 py-1 font-mono text-xs text-muted"
-                >
-                  {skill}
-                </span>
-              ))}
+            <div className="mt-4">
+              <SkillChips group={group} />
             </div>
           </motion.article>
         ))}
       </div>
+
+      {/* Mobile accordion (< md) */}
+      <motion.div variants={itemVariants} className="flex flex-col gap-2.5 md:hidden">
+        {skillGroups.map((group, index) => {
+          const isOpen = openGroup === index;
+          const panelId = `skill-group-${index}`;
+          return (
+            <div
+              key={group.title}
+              className={`overflow-hidden rounded-xl border bg-surface transition-colors ${
+                isOpen ? 'border-accent' : 'border-hairline'
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() => setOpenGroup(isOpen ? -1 : index)}
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+                className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left"
+              >
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-accent">{group.title}</span>
+                <span className="flex items-center gap-2 font-mono text-[11px] text-muted">
+                  {group.skills.length}
+                  <ChevronRight
+                    className={`size-4 text-accent transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
+                  />
+                </span>
+              </button>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    id={panelId}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="border-t border-hairline/60 px-4 pb-4 pt-3">
+                      <SkillChips group={group} size="sm" />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </motion.div>
+
     </motion.section>
   );
 }

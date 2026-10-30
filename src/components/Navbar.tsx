@@ -1,174 +1,105 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
-import { CodeXml, Contact, Menu, X, FileText, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
+import { sections } from '../data/site';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  // Hidden over the home page's landing; slides in once the content panel reaches the top.
+  const [revealed, setRevealed] = useState(pathname !== '/');
 
-  // Prevent background scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+    const landing = document.querySelector<HTMLElement>('[data-landing]');
+    if (!landing) {
+      setRevealed(true);
+      return;
     }
+    const update = () => setRevealed(window.scrollY > landing.offsetHeight - 96);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, [pathname]);
+
+  // Lock background scroll and close on Escape while the mobile menu is open.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    document.body.style.overflow = 'hidden';
+    const onKeyDown = (e: KeyboardEvent) => e.key === 'Escape' && setMobileMenuOpen(false);
+    window.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = [
-    { label: 'About', href: '/#about' },
-    { label: 'Work', href: '/#experience' },
-    { label: 'Projects', href: '/#projects' },
-    { label: 'Skills', href: '/#skills' },
-    { label: 'Build', href: '/#build' },
-  ];
+  const navLinks = sections.map((s) => ({ label: s.label, href: `/#${s.id}` }));
 
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/90 backdrop-blur-md transition-colors duration-300">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6" aria-label="Primary">
-        {/* Home Link (Replaces AR) */}
-        <Link 
-          href="/#top" 
-          className="font-serif text-xl font-bold tracking-tight text-ink hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-        >
-          Home
-        </Link>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b border-hairline bg-canvas/90 backdrop-blur-md transition-[translate,background-color] duration-300 motion-reduce:transition-none ${
+        revealed || mobileMenuOpen ? 'translate-y-0' : '-translate-y-full focus-within:translate-y-0'
+      }`}
+    >
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-6" aria-label="Primary">
+        <ThemeToggle />
 
-        {/* Desktop Nav Links */}
-        <div className="hidden items-center gap-7 md:flex">
+        {/* Desktop links */}
+        <ul className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="group relative overflow-hidden rounded-md px-3 py-2 text-sm text-muted transition-colors duration-300 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-            >
-              <span className="absolute inset-0 -translate-x-full rounded-md bg-accent-tint transition-transform duration-300 ease-out group-hover:translate-x-0"></span>
-              <span className="absolute inset-x-3 bottom-1 h-px origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100"></span>
-              <span className="relative z-10">{link.label}</span>
-            </a>
+            <li key={link.label}>
+              <a
+                href={link.href}
+                className="group relative block overflow-hidden rounded-md px-3 py-2 text-sm text-muted transition-colors duration-300 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              >
+                <span className="absolute inset-0 -translate-x-full rounded-md bg-accent-tint transition-transform duration-300 ease-out group-hover:translate-x-0"></span>
+                <span className="absolute inset-x-3 bottom-1 h-px origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100"></span>
+                <span className="relative z-10">{link.label}</span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        {/* Right Actions (Desktop) */}
-        <div className="hidden items-center gap-2 md:flex">
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50 border border-hairline bg-transparent text-ink hover:border-accent hover:text-accent h-9 px-3"
-          >
-            <FileText className="size-4" />
-            Resume
-          </a>
-
-          <ThemeToggle />
-
-          {/* GitHub Social Icon */}
-          <a
-            href="https://github.com/akkuraina"
-            aria-label="GitHub"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50 text-muted hover:bg-accent-tint hover:text-ink size-10 px-0 relative overflow-hidden group"
-            title="GitHub"
-          >
-            <CodeXml className="relative z-10 size-4" />
-          </a>
-
-          {/* LinkedIn Social Icon */}
-          <a
-            href="https://www.linkedin.com/in/akanksha-raina-4637b5268/"
-            aria-label="LinkedIn"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:pointer-events-none disabled:opacity-50 text-muted hover:bg-accent-tint hover:text-ink size-10 px-0 relative overflow-hidden group"
-            title="LinkedIn"
-          >
-            <Contact className="relative z-10 size-4" />
-          </a>
-        </div>
-
-        {/* Mobile menu toggle button */}
-        <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex items-center justify-center rounded-lg border border-hairline bg-surface p-2 text-ink transition-colors hover:border-accent hover:text-accent size-10 focus:outline-none"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </div>
+        {/* Mobile menu toggle */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="inline-flex size-10 items-center justify-center rounded-lg border border-hairline bg-surface p-2 text-ink transition-colors hover:border-accent hover:text-accent focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent lg:hidden"
+          aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
+        >
+          {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
       </nav>
 
-      {/* Mobile Backdrop & Drawer */}
+      {/* Mobile drawer: fills the screen below the bar */}
       {mobileMenuOpen && (
-        <>
-          {/* Solid Full-Screen Backdrop Overlay */}
-          <div 
-            className="fixed inset-0 top-16 z-40 bg-canvas opacity-100 md:hidden" 
-            onClick={() => setMobileMenuOpen(false)}
-          />
-
-          {/* Solid Opaque Drawer */}
-          <div className="absolute top-full left-0 right-0 z-50 flex flex-col gap-4 border-b-2 border-hairline bg-canvas p-6 md:hidden shadow-2xl max-h-[calc(100dvh-4rem)] overflow-y-auto text-ink">
-            <div className="flex flex-col gap-2.5">
-              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-accent mb-1 px-1">Navigation</p>
-              {navLinks.map((link) => (
+        <div
+          id="mobile-menu"
+          className="absolute inset-x-0 top-full h-[calc(100dvh-4rem)] overflow-y-auto border-t border-hairline bg-canvas p-6 lg:hidden"
+        >
+          <ul className="flex flex-col gap-2.5">
+            {navLinks.map((link) => (
+              <li key={link.label}>
                 <a
-                  key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between rounded-xl border border-hairline bg-surface px-4.5 py-3.5 font-mono text-base font-semibold text-ink shadow-sm hover:border-accent hover:bg-accent-tint hover:text-accent transition-all active:scale-[0.99]"
+                  className="flex items-center justify-between rounded-xl border border-hairline bg-surface px-4.5 py-3.5 font-mono text-base font-semibold text-ink shadow-sm transition-all hover:border-accent hover:bg-accent-tint hover:text-accent active:scale-[0.99]"
                 >
                   <span>{link.label}</span>
                   <ChevronRight className="size-4 text-accent" />
                 </a>
-              ))}
-            </div>
-
-            <div className="flex flex-col gap-3 pt-4 border-t border-hairline">
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-xl bg-accent text-surface px-4 py-3.5 font-mono text-sm font-semibold shadow-md hover:opacity-90 transition-all active:scale-[0.99]"
-              >
-                <FileText className="size-4" />
-                View Resume
-              </a>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <a
-                  href="https://github.com/akkuraina"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface px-3 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
-                >
-                  <CodeXml className="size-4" />
-                  GitHub
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/akanksha-raina-4637b5268/"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-hairline bg-surface px-3 py-3 font-mono text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
-                >
-                  <Contact className="size-4" />
-                  LinkedIn
-                </a>
-              </div>
-            </div>
-          </div>
-        </>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </header>
   );
