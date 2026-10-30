@@ -36,7 +36,7 @@ export default function Home() {
     <main className="min-h-screen">
       {/* Sticky 3D landing; the curved panel below scrolls up over it. */}
       <Landing />
-      <div className="relative z-10 -mt-12 rounded-t-[50%_3rem] border-t border-hairline bg-canvas shadow-[0_-24px_60px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)] sm:-mt-20 sm:rounded-t-[50%_7rem]">
+      <div className="relative z-10 rounded-t-[50%_3rem] border-t border-hairline bg-canvas shadow-[0_-24px_60px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)] sm:rounded-t-[50%_7rem]">
         <PopBackground variant="panel" />
         <Hero />
         <About />

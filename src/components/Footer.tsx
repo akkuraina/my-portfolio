@@ -1,5 +1,8 @@
+'use client';
+
 import { ArrowUp } from 'lucide-react';
 import { site } from '../data/site';
+import { scrollToTop } from '../lib/scroll';
 
 export default function Footer() {
   return (
@@ -8,13 +11,14 @@ export default function Footer() {
         <p>
           © {new Date().getFullYear()} {site.name} · Made with love, &lt;3 akanksha
         </p>
-        <a
-          href="#top"
+        <button
+          type="button"
+          onClick={scrollToTop}
           className="inline-flex w-fit items-center gap-1.5 transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           Back to top
           <ArrowUp className="size-3.5" />
-        </a>
+        </button>
       </div>
     </footer>
   );

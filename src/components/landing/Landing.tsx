@@ -113,9 +113,11 @@ export default function Landing() {
     <section
       ref={sectionRef}
       id="top"
+      data-landing
       aria-label="Introduction"
-      className="sticky top-16 h-[calc(100svh-4rem)] min-h-[520px] overflow-hidden"
-      style={{ ['--landing-size' as string]: 'clamp(3.25rem, 12.5vw, 9.5rem)' }}
+      className="sticky top-0 h-[100svh] min-h-[480px] overflow-hidden"
+      // Size by width and height, so both lines fit on short laptop screens too.
+      style={{ ['--landing-size' as string]: 'clamp(3rem, min(12.5vw, 15svh), 9.5rem)' }}
     >
       <div aria-hidden="true" className={`absolute inset-0 transition-opacity duration-1000 ${ready ? 'opacity-100' : 'opacity-0'}`}>
         <LandingScene palette={PALETTES[theme]} active={active} reduceMotion={reduceMotion} onReady={() => setReady(true)} />
@@ -158,7 +160,7 @@ export default function Landing() {
 
       <a
         href="#intro"
-        className="group absolute bottom-16 left-1/2 sm:bottom-28 z-10 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        className="group absolute bottom-8 left-1/2 sm:bottom-10 z-10 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       >
         ~/scroll
         <span className="flex size-10 items-center justify-center rounded-full border border-hairline bg-surface/60 backdrop-blur transition-colors group-hover:border-accent">

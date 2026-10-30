@@ -2,15 +2,36 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import CommandPalette from './CommandPalette';
 import { Menu, X, FileText, ChevronRight, Search } from 'lucide-react';
 import { sections, site } from '../data/site';
+import { scrollToTop } from '../lib/scroll';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [shortcut, setShortcut] = useState('Ctrl K');
+  const pathname = usePathname();
+  // Hidden over the home page's landing; slides in once the content panel reaches the top.
+  const [revealed, setRevealed] = useState(pathname !== '/');
+
+  useEffect(() => {
+    const landing = document.querySelector<HTMLElement>('[data-landing]');
+    if (!landing) {
+      setRevealed(true);
+      return;
+    }
+    const update = () => setRevealed(window.scrollY > landing.offsetHeight - 96);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, [pathname]);
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -46,13 +67,24 @@ export default function Navbar() {
   const navLinks = sections.map((s) => ({ label: s.label, href: `/#${s.id}` }));
 
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/90 backdrop-blur-md transition-colors duration-300">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b border-hairline bg-canvas/90 backdrop-blur-md transition-[translate,background-color] duration-300 motion-reduce:transition-none ${
+        revealed || mobileMenuOpen ? 'translate-y-0' : '-translate-y-full focus-within:translate-y-0'
+      }`}
+    >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-6" aria-label="Primary">
         <Link
-          href="/#top"
-          className="font-serif text-xl font-bold tracking-tight text-ink hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          href="/"
+          onClick={(e) => {
+            if (pathname === '/') {
+              e.preventDefault();
+              scrollToTop();
+            }
+          }}
+          aria-label={`${site.name}, back to top`}
+          className="text-gradient font-serif text-2xl font-black tracking-tight transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
-          Home
+          AR
         </Link>
 
         {/* Desktop Nav Links */}
