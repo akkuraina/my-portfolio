@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { Mail, FileText, Github, Linkedin } from 'lucide-react';
 import SectionTag from './SectionTag';
+import XIcon from './XIcon';
 import { site } from '../data/site';
 
 export default function Hero() {
@@ -29,13 +30,13 @@ export default function Hero() {
         </h2>
 
 
-        {/* Terminal Monospace Tagline Box */}
+        {/* What I'm doing right now */}
         <div className="mt-8">
-          <p className="inline-flex max-w-full items-center overflow-hidden rounded-md border border-hairline bg-surface/90 px-4 py-3 font-mono text-xs text-muted shadow-[0_1px_0_rgba(28,27,25,0.04)] backdrop-blur sm:text-sm">
-            <span className="truncate">
-              Building web and AI-integrated products with Next.js, Node.js, and LLM APIs
+          <p className="inline-flex max-w-full items-center rounded-md border border-hairline bg-surface/90 px-4 py-3 font-mono text-xs text-muted shadow-[0_1px_0_rgba(28,27,25,0.04)] backdrop-blur sm:text-sm">
+            <span>
+              <span className="text-accent">&gt; currently:</span> product engineering intern @ Tenet, building an AI voice-agent platform
             </span>
-            <span aria-hidden="true" className="ml-2 inline-block h-4 w-2 animate-cursor bg-accent"></span>
+            <span aria-hidden="true" className="ml-2 inline-block h-4 w-2 shrink-0 animate-cursor bg-accent"></span>
           </p>
         </div>
 
@@ -59,7 +60,7 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Social Icons & Location */}
+        {/* Social links */}
         <div className="mt-7 flex items-center gap-2 text-muted">
           <a
             href={site.github}
@@ -81,7 +82,16 @@ export default function Hero() {
           >
             <Linkedin className="size-4" />
           </a>
-          <span className="ml-2 font-mono text-xs">Mumbai, India</span>
+          <a
+            href={site.x}
+            aria-label="X (Twitter)"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors text-muted hover:bg-accent-tint hover:text-ink size-10 px-0"
+            title="X (Twitter)"
+          >
+            <XIcon className="size-3.5" />
+          </a>
         </div>
       </div>
     </section>

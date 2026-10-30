@@ -6,7 +6,7 @@ export const site = {
   resume: '/resume.pdf',
   github: 'https://github.com/akkuraina',
   linkedin: 'https://www.linkedin.com/in/akanksha-raina-4637b5268/',
-  instagram: 'https://instagram.com/akkuraina',
+  x: 'https://x.com/ARaina91670',
 };
 
 // Primary navigation (components/Navbar.tsx).
