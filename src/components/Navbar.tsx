@@ -156,7 +156,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-xl bg-accent text-surface px-4 py-3.5 font-mono text-sm font-semibold shadow-md hover:opacity-90 transition-all active:scale-[0.99]"
+                className="flex items-center justify-center gap-2 rounded-xl btn-pop px-4 py-3.5 font-mono text-sm font-semibold shadow-md hover:opacity-90 transition-all active:scale-[0.99]"
               >
                 <FileText className="size-4" />
                 View Resume

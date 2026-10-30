@@ -46,7 +46,7 @@ export default function Contact() {
         <SectionTag text="~/contact" start={isInView} />
 
         <h2 className="mt-4 max-w-2xl font-serif text-3xl font-bold text-ink sm:text-5xl">
-          Let&apos;s build something worth shipping.
+          Let&apos;s build something <span className="text-gradient">worth shipping.</span>
         </h2>
 
         <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
@@ -56,7 +56,7 @@ export default function Contact() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
             href={`mailto:${site.email}`}
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent bg-ink text-canvas hover:bg-accent h-11 px-5"
+            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent btn-pop h-11 px-5"
           >
             <Mail className="size-4" />
             Email me

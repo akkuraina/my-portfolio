@@ -21,7 +21,7 @@ export default function Hero() {
         </p>
 
         {/* Name Title: One Line, Thinner Weight, Larger Font */}
-        <h1 className="mt-5 whitespace-nowrap font-serif text-5xl font-normal leading-[0.95] tracking-tight text-ink sm:text-7xl lg:text-[6.5rem] xl:text-[7.5rem]">
+        <h1 className="mt-5 whitespace-nowrap font-serif text-5xl font-normal leading-[1.05] tracking-tight text-gradient pb-1 sm:text-7xl lg:text-[6.5rem] xl:text-[7.5rem]">
           Akanksha Raina
         </h1>
 
@@ -44,7 +44,7 @@ export default function Hero() {
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
             href={`mailto:${site.email}`}
-            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent bg-ink text-canvas hover:bg-accent h-11 px-5"
+            className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent btn-pop h-11 px-5"
           >
             <Mail className="size-4" />
             Email me

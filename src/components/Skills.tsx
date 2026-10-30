@@ -6,6 +6,8 @@ import { ChevronRight, ArrowUpRight } from 'lucide-react';
 import { skillGroups, patterns, type SkillGroup } from '../data/skills';
 import { projects } from '../data/projects';
 
+const ACCENTS = ['var(--accent)', 'var(--accent-2)', 'var(--accent-3)', 'var(--accent-4)'];
+
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -98,11 +100,14 @@ export default function Skills() {
           <motion.article
             key={group.title}
             variants={itemVariants}
-            className={`flex flex-col rounded-lg border border-hairline bg-surface p-6 shadow-[0_1px_0_rgba(28,27,25,0.04)] transition duration-300 hover:-translate-y-1 hover:border-accent ${
-              index === 0 ? 'md:col-span-2' : ''
+            style={{ borderTopColor: ACCENTS[index % ACCENTS.length] }}
+            className={`flex flex-col rounded-lg border border-t-2 border-hairline bg-surface p-6 shadow-[0_1px_0_rgba(28,27,25,0.04)] transition duration-300 hover:-translate-y-1 hover:border-accent ${
+              index === 0 ? 'md:col-span-2' : index === skillGroups.length - 1 ? 'lg:col-span-3' : ''
             }`}
           >
-            <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-accent">{group.title}</h3>
+            <h3 className="font-mono text-xs uppercase tracking-[0.18em]" style={{ color: ACCENTS[index % ACCENTS.length] }}>
+              {group.title}
+            </h3>
             <div className="mt-4">
               <SkillChips group={group} />
             </div>

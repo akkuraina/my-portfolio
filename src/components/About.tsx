@@ -29,7 +29,7 @@ const itemVariants: Variants = {
 // Inline Keyword Chip Component
 function TechChip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-md border border-hairline bg-accent-tint/60 px-2 py-0.5 font-mono text-xs sm:text-[13px] font-medium text-accent shadow-xs mx-1 align-baseline transition-all hover:border-accent hover:shadow-[0_0_12px_rgba(25,211,197,0.22)]">
+    <span className="inline-flex items-center rounded-md border border-hairline bg-accent-tint/60 px-2 py-0.5 font-mono text-xs sm:text-[13px] font-medium text-accent shadow-xs mx-1 align-baseline transition-all hover:border-accent hover:shadow-[0_0_12px_color-mix(in_srgb,var(--accent)_30%,transparent)]">
       {children}
     </span>
   );
@@ -135,8 +135,8 @@ export default function About() {
                 <p className="text-muted">&gt; Focus: Web · Backend · AI Systems</p>
                 <div className="flex items-center gap-2 pt-1">
                   <span className="text-muted">&gt; Status:</span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
-                    <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-4/10 border border-accent-4/40 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700 dark:text-accent-4">
+                    <span className="size-2 rounded-full bg-accent-4 animate-pulse" />
                     Available for opportunities
                   </span>
                 </div>
