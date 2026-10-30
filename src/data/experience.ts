@@ -6,6 +6,8 @@ export type Experience = {
   company: string;
   location: string;
   mode: string;
+  website?: string;
+  certificate?: string;
   bullets: string[];
   tech: string[];
 };
@@ -15,6 +17,7 @@ export const experiences: Experience[] = [
     dates: 'October 2026 – Present',
     role: 'Product Engineering Intern',
     company: 'Tenet',
+    website: 'https://trytenet.ai/',
     location: 'Texas, USA',
     mode: 'Remote',
     bullets: [
@@ -28,6 +31,8 @@ export const experiences: Experience[] = [
     dates: 'July 2026 – October 2026',
     role: 'Fullstack Developer Intern',
     company: 'Sugamaya Governance LLP',
+    website: 'https://www.sugamaya.in/',
+    certificate: '/sugamaya.png',
     location: 'Malad West, Mumbai',
     mode: 'On-site',
     bullets: [
@@ -42,6 +47,8 @@ export const experiences: Experience[] = [
     dates: 'June 2025 – July 2025',
     role: 'IT Intern',
     company: 'Tech Mahindra',
+    website: 'https://www.techmahindra.com/',
+    certificate: '/techmahindra.png',
     location: 'Powai, Mumbai',
     mode: 'Hybrid',
     bullets: [
@@ -51,9 +58,11 @@ export const experiences: Experience[] = [
     tech: ['ServiceNow', 'ITIL4'],
   },
   {
-    dates: 'July 2024',
+    dates: 'June 2024',
     role: 'Robotics and Mechatronics Intern',
     company: 'Naval Dockyard, Mumbai (WECORS)',
+    website: 'https://www.joinindiannavy.gov.in/',
+    certificate: '/naval.jpg',
     location: 'Fort, Mumbai',
     mode: 'On-site',
     bullets: [

@@ -11,11 +11,14 @@ import {
   useReducedMotion,
   type MotionValue,
 } from 'framer-motion';
-import { MapPin, RotateCw } from 'lucide-react';
+import { MapPin, RotateCw, Globe, Award, ArrowUpRight } from 'lucide-react';
 import SectionTag from './SectionTag';
 import { experiences, type Experience as ExperienceItem } from '../data/experience';
 
 const ACCENTS = ['var(--accent)', 'var(--accent-2)', 'var(--accent-3)', 'var(--accent-4)'];
+
+const linkClass =
+  'inline-flex items-center gap-1.5 rounded-full border border-hairline bg-surface/80 px-3 py-1 font-mono text-[11px] text-muted backdrop-blur transition-colors hover:border-accent hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
 
 // Vine geometry: two sine strands in a 40 x 1000 viewBox, stretched to the timeline's height.
 // One full twist per experience, so the strands cross at each card's node.
@@ -129,7 +132,8 @@ function FlipCard({ exp, index }: { exp: ExperienceItem; index: number }) {
   };
 
   return (
-    <div className="group relative [perspective:1400px]">
+    <div>
+      <div className="group relative [perspective:1400px]">
       <button
         type="button"
         onClick={() => setFlipped((f) => !f)}
@@ -210,6 +214,29 @@ function FlipCard({ exp, index }: { exp: ExperienceItem; index: number }) {
           </ul>
         </article>
       </div>
+      </div>
+
+      {/* Links sit outside the flipping card so they stay put while it rotates. */}
+      {(exp.website || exp.certificate) && (
+        <div className="mt-2.5 flex flex-wrap items-center gap-2 px-1">
+          {exp.website && (
+            <a href={exp.website} target="_blank" rel="noreferrer" className={linkClass}>
+              <Globe className="size-3.5" style={{ color: accent }} />
+              {new URL(exp.website).hostname.replace(/^www\./, '')}
+              <ArrowUpRight className="size-3" />
+              <span className="sr-only">({exp.company} website, opens in new tab)</span>
+            </a>
+          )}
+          {exp.certificate && (
+            <a href={exp.certificate} target="_blank" rel="noreferrer" className={linkClass}>
+              <Award className="size-3.5" style={{ color: accent }} />
+              Internship certificate
+              <ArrowUpRight className="size-3" />
+              <span className="sr-only">for {exp.company} (opens in new tab)</span>
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }
