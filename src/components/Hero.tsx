@@ -2,11 +2,9 @@
 
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
-import { Mail, FileText, CodeXml, Contact, GraduationCap } from 'lucide-react';
+import { Mail, FileText, CodeXml, Contact } from 'lucide-react';
 import SectionTag from './SectionTag';
 import { site } from '../data/site';
-
-const education = ['DJSCE, Mumbai', 'B.Tech Electronics & Telecommunication', 'Batch of 2027', 'Honors in AI/ML'];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -30,17 +28,6 @@ export default function Hero() {
           Full-stack engineer building <span className="text-gradient">web, backend &amp; AI-integrated</span> systems.
         </h2>
 
-        {/* Education */}
-        <ul aria-label="Education" className="mt-7 flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
-          <li aria-hidden="true">
-            <GraduationCap className="size-4 text-accent-2" />
-          </li>
-          {education.map((item) => (
-            <li key={item} className="rounded-full border border-hairline bg-surface/70 px-3 py-1">
-              {item}
-            </li>
-          ))}
-        </ul>
 
         {/* Terminal Monospace Tagline Box */}
         <div className="mt-8">
