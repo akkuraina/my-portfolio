@@ -31,7 +31,7 @@ export const projects: Project[] = [
     tagline: 'Conflict-free collaborative document editor & CRDT engine',
     problem: 'Collaborative editors usually lock the doc, show conflict dialogs, or let the last write win.',
     outcome: 'Concurrent edits merge into the same document on every screen, with presence and version restore.',
-    builtWith: ['Next.js 15', 'React', 'TypeScript', 'Supabase', 'Tiptap', 'CRDT / RGA', 'Clerk', 'TailwindCSS'],
+    builtWith: ['Next.js 15', 'TypeScript', 'Supabase', 'Tiptap', 'CRDT / RGA', 'Clerk'],
     architecture: {
       kind: 'layers',
       layers: [
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     tagline: 'Event-sourced financial ledger & CQRS projections',
     problem: 'Updating balances in place loses history, and a retried request can record a payment twice.',
     outcome: 'Every change is an immutable event, and read models rebuild from the stream.',
-    builtWith: ['Next.js 16', 'TypeScript', 'PostgreSQL', 'Prisma 7', 'Redis', 'BullMQ', 'Better Auth', 'Appwrite'],
+    builtWith: ['Next.js 16', 'TypeScript', 'PostgreSQL', 'Prisma 7', 'BullMQ', 'Better Auth'],
     architecture: {
       kind: 'layers',
       layers: [
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     tagline: 'Browser-based real-time 3D multiplayer game',
     problem: 'If each browser decides what happened, players drift out of sync and can cheat.',
     outcome: '4-player capture-the-flag where the server runs the match and saves stats to a leaderboard.',
-    builtWith: ['Next.js', 'TypeScript', 'React Three Fiber', 'Rapier', 'Socket.IO', 'Node.js', 'Express.js', 'MongoDB', 'JWT'],
+    builtWith: ['Next.js', 'React Three Fiber', 'Rapier', 'Socket.IO', 'Express.js', 'MongoDB'],
     architecture: {
       kind: 'layers',
       layers: [
@@ -127,7 +127,7 @@ export const projects: Project[] = [
     tagline: 'Full-stack real-time chat application',
     problem: 'Group chat and video calls usually live in separate apps.',
     outcome: 'Group chat, reply threads, and 1-on-1 or group video calls, with call history in the chat.',
-    builtWith: ['React', 'Chakra UI', 'Node.js', 'Express.js', 'MongoDB', 'Socket.IO', 'LiveKit', 'Cloudinary'],
+    builtWith: ['React', 'Chakra UI', 'Express.js', 'MongoDB', 'Socket.IO', 'LiveKit'],
     architecture: {
       kind: 'layers',
       layers: [
@@ -155,7 +155,7 @@ export const projects: Project[] = [
     tagline: 'Mental wellness platform',
     problem: 'Asking for help feels like a big step, and mood patterns are easy to miss.',
     outcome: 'Mood-tracked journaling plus counselor booking with availability checks and Google Meet links.',
-    builtWith: ['React', 'Vite', 'TypeScript', 'TailwindCSS', 'shadcn/ui', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Google Calendar API'],
+    builtWith: ['React (Vite)', 'TypeScript', 'Express.js', 'MongoDB', 'Google Calendar'],
     architecture: {
       kind: 'layers',
       layers: [
@@ -177,7 +177,7 @@ export const projects: Project[] = [
     tagline: 'Job matching platform',
     problem: 'Keyword filters are too rigid, and ML or LLM rankings can’t explain themselves.',
     outcome: 'Ranks candidates for a job and explains every score.',
-    builtWith: ['React', 'FastAPI', 'SQLAlchemy', 'scikit-learn', 'sentence-transformers', 'SQLite', 'Docker'],
+    builtWith: ['React', 'FastAPI', 'SQLAlchemy', 'scikit-learn', 'sentence-transformers'],
     architecture: {
       kind: 'layers',
       layers: [
@@ -205,7 +205,7 @@ export const projects: Project[] = [
     tagline: 'Local Artist & Underground Gig Finder',
     problem: 'Underground gigs are scattered across social posts and word of mouth.',
     outcome: 'Gig listings, artist and venue profiles, live check-ins, and community vibe ratings.',
-    builtWith: ['Next.js 15', 'React 19', 'TypeScript', 'TailwindCSS', 'Node.js', 'Express.js', 'MongoDB', 'Socket.IO', 'Cloudinary'],
+    builtWith: ['Next.js 15', 'TypeScript', 'Express.js', 'MongoDB', 'Socket.IO', 'Cloudinary'],
     architecture: {
       kind: 'layers',
       layers: [

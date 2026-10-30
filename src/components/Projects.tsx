@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { CodeXml, ExternalLink, Globe, MonitorPlay, ChevronRight, ArrowRight, ArrowDown } from 'lucide-react';
+import { Github, ExternalLink, Globe, MonitorPlay, ChevronRight, ArrowRight, ArrowDown } from 'lucide-react';
 import { projects, type Project, type Architecture } from '../data/projects';
 import { isVisible } from '../lib/todo';
 import Copy from './Copy';
@@ -91,20 +91,21 @@ function SectionContent({ project, section }: { project: Project; section: Secti
             </div>
           )}
           {isVisible(project.outcome) && (
-            <div className="rounded-lg border-l-2 border-accent bg-accent-tint/50 px-4 py-3">
+            <div>
               <Label>Outcome</Label>
-              <p className="text-sm font-medium leading-relaxed text-ink">
+              <p className="text-sm leading-relaxed text-ink">
                 <Copy value={project.outcome} />
               </p>
             </div>
           )}
           <div>
             <Label>How it was built</Label>
-            <ul className="flex flex-wrap gap-2">
+            {/* Always one line; scrolls sideways (with an edge fade) on narrow screens */}
+            <ul className="flex flex-nowrap gap-2 overflow-x-auto [scrollbar-width:none] max-md:[mask-image:linear-gradient(to_right,black_85%,transparent)] [&::-webkit-scrollbar]:hidden">
               {project.builtWith.map((t) => (
                 <li
                   key={t}
-                  className="rounded-md bg-accent-tint/80 border border-accent/20 px-2.5 py-1 font-mono text-xs text-accent font-medium"
+                  className="shrink-0 whitespace-nowrap rounded-md bg-accent-tint/80 border border-accent/20 px-2.5 py-1 font-mono text-xs text-accent font-medium"
                 >
                   {t}
                 </li>
@@ -145,7 +146,7 @@ function ProjectLinks({ project, compact = false }: { project: Project; compact?
     <>
       {project.links.code && (
         <a href={project.links.code} target="_blank" rel="noreferrer" className={`${base} font-medium`}>
-          <CodeXml className={compact ? 'size-3.5' : 'size-4'} />
+          <Github className={compact ? 'size-3.5' : 'size-4'} />
           <span>Code</span>
           <span className="sr-only">for {project.name} (opens in new tab)</span>
         </a>
