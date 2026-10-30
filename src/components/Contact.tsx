@@ -45,7 +45,7 @@ export default function Contact() {
       <div className="rounded-2xl border border-hairline bg-surface/80 p-6 sm:p-12 shadow-[0_1px_0_rgba(28,27,25,0.04)] backdrop-blur">
         <SectionTag text="~/contact" start={isInView} />
 
-        <h2 className="mt-4 max-w-2xl font-serif text-3xl font-bold text-ink sm:text-5xl">
+        <h2 className="mt-4 max-w-2xl font-serif text-3xl font-normal text-ink sm:text-5xl">
           Let&apos;s build something <span className="text-gradient">worth shipping.</span>
         </h2>
 

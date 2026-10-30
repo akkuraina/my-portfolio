@@ -26,7 +26,7 @@ export default function Hero() {
         <SectionTag text="~/about" start={isInView} />
 
         {/* Role statement (the name itself lives on the landing above) */}
-        <h2 className="mt-5 max-w-4xl font-serif text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+        <h2 className="mt-5 max-w-4xl font-serif text-4xl font-normal leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-7xl">
           Full-stack engineer building <span className="text-gradient">web, backend &amp; AI-integrated</span> systems.
         </h2>
 

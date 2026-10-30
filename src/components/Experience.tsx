@@ -157,7 +157,7 @@ function FlipCard({ exp, index }: { exp: ExperienceItem; index: number }) {
           <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1" style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }} />
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-6 right-3 select-none font-serif text-[7rem] font-bold leading-none opacity-[0.12]"
+            className="pointer-events-none absolute -bottom-6 right-3 select-none font-serif text-[7rem] font-normal leading-none opacity-[0.12]"
             style={{ color: accent }}
           >
             {number}
@@ -166,7 +166,7 @@ function FlipCard({ exp, index }: { exp: ExperienceItem; index: number }) {
           <p className="font-mono text-xs font-semibold" style={{ color: accent }}>
             {exp.dates}
           </p>
-          <h3 className="mt-3 font-serif text-2xl font-bold leading-tight text-ink">{exp.company}</h3>
+          <h3 className="mt-3 font-serif text-2xl font-medium leading-tight text-ink">{exp.company}</h3>
           <p className="mt-1 text-sm font-medium text-ink/80">{exp.role}</p>
 
           <div className="mt-4 flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
@@ -256,7 +256,7 @@ export default function Experience() {
     <section ref={sectionRef} id="experience" className="mx-auto max-w-6xl scroll-mt-16 px-5 py-20 sm:px-6">
       <div className="mb-12">
         <SectionTag text="~/experience" start={isInView} />
-        <h2 className="mt-3 font-serif text-3xl font-bold text-ink sm:text-4xl">Deploy History.</h2>
+        <h2 className="mt-3 font-serif text-3xl font-normal text-ink sm:text-4xl">Deploy History.</h2>
       </div>
 
       <div ref={timelineRef} className="relative">

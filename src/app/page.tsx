@@ -26,10 +26,6 @@ const Contact = dynamic(() => import('../components/Contact'), {
   ssr: true,
 });
 
-const Footer = dynamic(() => import('../components/Footer'), {
-  ssr: true,
-});
-
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -44,7 +40,6 @@ export default function Home() {
         <Skills />
         <Research />
         <Contact />
-        <Footer />
       </div>
     </main>
   );

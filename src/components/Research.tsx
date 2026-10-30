@@ -50,7 +50,7 @@ export default function Research() {
     >
       <motion.div variants={itemVariants} className="mb-8">
         <SectionTag text="~/research" start={isInView} />
-        <h2 className="mt-3 font-serif text-3xl font-bold text-ink sm:text-4xl">
+        <h2 className="mt-3 font-serif text-3xl font-normal text-ink sm:text-4xl">
           Research &amp; certifications.
         </h2>
       </motion.div>
@@ -79,7 +79,7 @@ export default function Research() {
                 <div className="mt-3 flex items-start gap-3">
                   <FileText aria-hidden="true" className="mt-1 size-5 shrink-0 text-accent-2" />
                   <div className="min-w-0">
-                    <p className="font-serif text-xl font-bold text-ink">{paper.title}</p>
+                    <p className="font-serif text-xl font-medium text-ink">{paper.title}</p>
                     {isVisible(paper.venue) && (
                       <p className="mt-1 text-sm text-muted">
                         <Copy value={paper.venue} />
