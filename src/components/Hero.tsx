@@ -5,9 +5,9 @@ import { site } from '../data/site';
 
 export default function Hero() {
   return (
-    <section id="top" className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col justify-center px-5 py-20 sm:px-6">
+    <section id="intro" className="relative mx-auto flex max-w-6xl scroll-mt-16 flex-col justify-center px-5 pb-16 pt-24 sm:px-6 sm:pt-32">
       {/* Background Decorative Grid & Scanline */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent)]">
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,color-mix(in_srgb,var(--hairline)_64%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_srgb,var(--hairline)_64%,transparent)_1px,transparent_1px)] bg-[size:76px_76px] opacity-40"></div>
         {/* Top scanline */}
@@ -20,15 +20,10 @@ export default function Hero() {
           Full-Stack Developer / SDE
         </p>
 
-        {/* Name Title: One Line, Thinner Weight, Larger Font */}
-        <h1 className="mt-5 whitespace-nowrap font-serif text-5xl font-normal leading-[1.05] tracking-tight text-gradient pb-1 sm:text-7xl lg:text-[6.5rem] xl:text-[7.5rem]">
-          Akanksha Raina
-        </h1>
-
-        {/* Bio Subtitle */}
-        <p className="mt-7 max-w-2xl text-lg leading-8 text-muted sm:text-xl font-normal">
-          Full-stack engineer building web, backend &amp; AI-integrated systems
-        </p>
+        {/* Role statement (the name itself lives on the landing above) */}
+        <h2 className="mt-5 max-w-4xl font-serif text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+          Full-stack engineer building <span className="text-gradient">web, backend &amp; AI-integrated</span> systems.
+        </h2>
 
         {/* Terminal Monospace Tagline Box */}
         <div className="mt-8">
