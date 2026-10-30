@@ -7,13 +7,12 @@ import { projects, type Project, type Architecture } from '../data/projects';
 import { isVisible } from '../lib/todo';
 import Copy from './Copy';
 
-type SectionId = 'overview' | 'architecture' | 'decisions' | 'hard';
+type SectionId = 'overview' | 'architecture' | 'decisions';
 
 const sectionLabels: Record<SectionId, string> = {
   overview: 'Overview',
   architecture: 'Architecture',
   decisions: 'Key decisions',
-  hard: 'What was hard',
 };
 
 // Sections with no (visible) content are hidden, so unfinished write-ups still look complete.
@@ -21,7 +20,6 @@ function sectionsFor(project: Project): SectionId[] {
   const sections: SectionId[] = ['overview'];
   if (project.architecture) sections.push('architecture');
   if (project.decisions?.some((d) => isVisible(d.title) && isVisible(d.why))) sections.push('decisions');
-  if (project.hard?.some((h) => isVisible(h.challenge) && isVisible(h.approach))) sections.push('hard');
   return sections;
 }
 
@@ -44,10 +42,9 @@ function ArchitectureDiagram({ architecture, name }: { architecture: Architectur
     );
   }
 
-  const { layers, note } = architecture;
+  const { layers } = architecture;
   return (
-    <div>
-      <ol
+    <ol
         aria-label={`${name} architecture, in order of data flow`}
         className="flex flex-col items-stretch gap-2 sm:flex-row"
       >
@@ -76,13 +73,7 @@ function ArchitectureDiagram({ architecture, name }: { architecture: Architectur
             )}
           </li>
         ))}
-      </ol>
-      {note && (
-        <p className="mt-3 text-xs leading-relaxed text-muted">
-          <Copy value={note} />
-        </p>
-      )}
-    </div>
+    </ol>
   );
 }
 
@@ -99,7 +90,6 @@ function SectionContent({ project, section }: { project: Project; section: Secti
               </p>
             </div>
           )}
-          <p className="text-sm leading-relaxed text-muted">{project.summary}</p>
           {isVisible(project.outcome) && (
             <div className="rounded-lg border-l-2 border-accent bg-accent-tint/50 px-4 py-3">
               <Label>Outcome</Label>
@@ -140,27 +130,6 @@ function SectionContent({ project, section }: { project: Project; section: Secti
                 <p className="mt-1 text-sm leading-relaxed text-muted">
                   <Copy value={d.why} />
                 </p>
-              </li>
-            ))}
-        </ul>
-      );
-    case 'hard':
-      return (
-        <ul className="flex flex-col gap-4">
-          {project.hard
-            ?.filter((h) => isVisible(h.challenge) && isVisible(h.approach))
-            .map((h) => (
-              <li key={h.challenge} className="rounded-lg border border-hairline p-4">
-                <Label>Challenge</Label>
-                <p className="text-sm font-medium leading-relaxed text-ink">
-                  <Copy value={h.challenge} />
-                </p>
-                <div className="mt-3">
-                  <Label>Approach</Label>
-                  <p className="text-sm leading-relaxed text-muted">
-                    <Copy value={h.approach} />
-                  </p>
-                </div>
               </li>
             ))}
         </ul>
@@ -293,7 +262,7 @@ export default function Projects() {
           <span>{typedTag}</span>
           <span className={`inline-block w-1.5 h-3.5 bg-accent ${typingComplete ? 'animate-cursor' : 'opacity-100'}`} />
         </div>
-        <h2 className="mt-3 font-serif text-3xl font-bold text-ink sm:text-4xl">
+        <h2 className="mt-3 font-serif text-3xl font-normal text-ink sm:text-4xl">
           Builds that made it to prod.
         </h2>
         <p className="mt-2 text-sm text-muted max-w-xl">
@@ -337,7 +306,7 @@ export default function Projects() {
                     }`}>
                     0{index + 1}
                   </span>
-                  <span className={`font-serif text-lg tracking-tight transition-colors duration-200 ${isActive ? 'text-ink font-bold' : 'text-muted group-hover:text-ink font-normal'
+                  <span className={`font-serif text-lg tracking-tight transition-colors duration-200 ${isActive ? 'text-ink font-medium' : 'text-muted group-hover:text-ink font-normal'
                     }`}>
                     {project.name}
                   </span>
@@ -409,7 +378,7 @@ export default function Projects() {
                 {/* Title, tagline, links */}
                 <div>
                   <div className="flex items-center justify-between gap-4">
-                    <h3 className="font-serif text-2xl sm:text-3xl font-bold text-ink">{activeProject.name}</h3>
+                    <h3 className="font-serif text-2xl sm:text-3xl font-medium text-ink">{activeProject.name}</h3>
                     <div className="flex items-center gap-2">
                       <ProjectLinks project={activeProject} />
                     </div>
@@ -491,7 +460,7 @@ export default function Projects() {
                     0{index + 1}
                   </span>
                   <div>
-                    <h3 className={`font-serif text-lg font-bold ${isOpen ? 'text-ink' : 'text-muted'}`}>
+                    <h3 className={`font-serif text-lg font-medium ${isOpen ? 'text-ink' : 'text-muted'}`}>
                       {project.name}
                     </h3>
                     <p className="font-mono text-[11px] uppercase tracking-wider text-accent mt-0.5">
