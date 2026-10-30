@@ -30,7 +30,7 @@ export const experiences: Experience[] = [
   {
     dates: 'July 2026 – October 2026',
     role: 'Fullstack Developer Intern',
-    company: 'Sugamaya Governance LLP',
+    company: 'Shreshth Sugamaya Governance LLP',
     website: 'https://www.sugamaya.in/',
     certificate: '/sugamaya.png',
     location: 'Malad West, Mumbai',
