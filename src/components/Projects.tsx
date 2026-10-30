@@ -341,9 +341,9 @@ export default function Projects() {
                 <div className="overflow-hidden rounded-xl border border-hairline bg-surface shadow-sm">
                   <div className="flex items-center justify-between px-3.5 py-2.5 bg-accent-tint/40 border-b border-hairline text-xs font-mono">
                     <div className="flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-400/80 inline-block" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/80 inline-block" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-400/80 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-muted/40 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-muted/40 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-muted/40 inline-block" />
                     </div>
                     <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface/90 border border-hairline/60 text-[11px] text-muted max-w-[280px] truncate">
                       <Globe className="w-3.5 h-3.5 text-accent shrink-0" />
@@ -490,9 +490,9 @@ export default function Projects() {
                         <div className="overflow-hidden rounded-lg border border-hairline bg-surface mt-2">
                           <div className="flex items-center justify-between px-3 py-1.5 bg-accent-tint/40 border-b border-hairline text-[10px] font-mono">
                             <div className="flex items-center gap-1">
-                              <span className="w-2 h-2 rounded-full bg-red-400 inline-block" />
-                              <span className="w-2 h-2 rounded-full bg-yellow-400 inline-block" />
-                              <span className="w-2 h-2 rounded-full bg-green-400 inline-block" />
+                              <span className="w-2 h-2 rounded-full bg-muted/40 inline-block" />
+                              <span className="w-2 h-2 rounded-full bg-muted/40 inline-block" />
+                              <span className="w-2 h-2 rounded-full bg-muted/40 inline-block" />
                             </div>
                             <span className="truncate max-w-[170px] text-muted">{project.previewUrl}</span>
                           </div>
