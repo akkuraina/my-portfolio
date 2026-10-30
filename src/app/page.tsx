@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import Landing from '../components/landing/Landing';
 import PopBackground from '../components/PopBackground';
 import Hero from '../components/Hero';
-import About from '../components/About';
 
 // Lazy load below-the-fold components with Next.js dynamic imports
 const Experience = dynamic(() => import('../components/Experience'), {
@@ -34,12 +33,12 @@ const Footer = dynamic(() => import('../components/Footer'), {
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Sticky 3D landing; the curved panel below scrolls up over it. */}
+      {/* Sticky 3D landing; the curved panel below scrolls up over it.
+          overflow-x-clip stops slide-in animations from widening the mobile viewport. */}
       <Landing />
-      <div className="relative z-10 rounded-t-[50%_3rem] border-t border-hairline bg-canvas shadow-[0_-24px_60px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)] sm:rounded-t-[50%_7rem]">
+      <div className="relative z-10 overflow-x-clip rounded-t-[50%_3rem] border-t border-hairline bg-canvas shadow-[0_-24px_60px_-24px_color-mix(in_srgb,var(--accent)_45%,transparent)] sm:rounded-t-[50%_7rem]">
         <PopBackground variant="panel" />
         <Hero />
-        <About />
         <Experience />
         <Projects />
         <Skills />

@@ -159,7 +159,7 @@ export default function Landing() {
       </div>
 
       <a
-        href="#intro"
+        href="#about"
         className="group absolute bottom-8 left-1/2 sm:bottom-10 z-10 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       >
         ~/scroll

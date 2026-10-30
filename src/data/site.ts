@@ -9,7 +9,7 @@ export const site = {
   instagram: 'https://instagram.com/akkuraina',
 };
 
-// Primary navigation, also used as the "Sections" group in search.
+// Primary navigation (components/Navbar.tsx).
 export const sections = [
   { label: 'About', id: 'about' },
   { label: 'Experience', id: 'experience' },

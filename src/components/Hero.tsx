@@ -1,11 +1,19 @@
 'use client';
 
-import { Mail, FileText, CodeXml, Contact } from 'lucide-react';
+import { useRef } from 'react';
+import { useInView } from 'framer-motion';
+import { Mail, FileText, CodeXml, Contact, GraduationCap } from 'lucide-react';
+import SectionTag from './SectionTag';
 import { site } from '../data/site';
 
+const education = ['DJSCE, Mumbai', 'B.Tech Electronics & Telecommunication', 'Batch of 2027', 'Honors in AI/ML'];
+
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+
   return (
-    <section id="intro" className="relative mx-auto flex max-w-6xl scroll-mt-16 flex-col justify-center px-5 pb-16 pt-24 sm:px-6 sm:pt-32">
+    <section ref={sectionRef} id="about" className="relative mx-auto flex max-w-6xl scroll-mt-16 flex-col justify-center px-5 pb-16 pt-24 sm:px-6 sm:pt-32">
       {/* Background Decorative Grid & Scanline */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent)]">
         {/* Grid pattern */}
@@ -15,15 +23,24 @@ export default function Hero() {
       </div>
 
       <div className="max-w-4xl">
-        {/* Uppercase Role Tag */}
-        <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent">
-          Full-Stack Developer / SDE
-        </p>
+        <SectionTag text="~/about" start={isInView} />
 
         {/* Role statement (the name itself lives on the landing above) */}
         <h2 className="mt-5 max-w-4xl font-serif text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-7xl">
           Full-stack engineer building <span className="text-gradient">web, backend &amp; AI-integrated</span> systems.
         </h2>
+
+        {/* Education */}
+        <ul aria-label="Education" className="mt-7 flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
+          <li aria-hidden="true">
+            <GraduationCap className="size-4 text-accent-2" />
+          </li>
+          {education.map((item) => (
+            <li key={item} className="rounded-full border border-hairline bg-surface/70 px-3 py-1">
+              {item}
+            </li>
+          ))}
+        </ul>
 
         {/* Terminal Monospace Tagline Box */}
         <div className="mt-8">
