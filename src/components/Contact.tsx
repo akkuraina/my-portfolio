@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
-import { Mail, FileText, CodeXml, Contact as ContactIcon, Instagram, Copy as CopyIcon, Check } from 'lucide-react';
+import { Mail, FileText, Github, Linkedin, Instagram, Copy as CopyIcon, Check } from 'lucide-react';
 import SectionTag from './SectionTag';
 import { site } from '../data/site';
 
@@ -12,8 +12,8 @@ const sectionVariants: Variants = {
 };
 
 const socials = [
-  { name: 'GitHub', href: site.github, icon: CodeXml },
-  { name: 'LinkedIn', href: site.linkedin, icon: ContactIcon },
+  { name: 'GitHub', href: site.github, icon: Github },
+  { name: 'LinkedIn', href: site.linkedin, icon: Linkedin },
   { name: 'Instagram', href: site.instagram, icon: Instagram },
 ];
 

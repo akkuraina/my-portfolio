@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { useInView } from 'framer-motion';
-import { Mail, FileText, CodeXml, Contact } from 'lucide-react';
+import { Mail, FileText, Github, Linkedin } from 'lucide-react';
 import SectionTag from './SectionTag';
 import { site } from '../data/site';
 
@@ -69,7 +69,7 @@ export default function Hero() {
             className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors text-muted hover:bg-accent-tint hover:text-ink size-10 px-0"
             title="GitHub"
           >
-            <CodeXml className="size-4" />
+            <Github className="size-4" />
           </a>
           <a
             href={site.linkedin}
@@ -79,7 +79,7 @@ export default function Hero() {
             className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors text-muted hover:bg-accent-tint hover:text-ink size-10 px-0"
             title="LinkedIn"
           >
-            <Contact className="size-4" />
+            <Linkedin className="size-4" />
           </a>
           <span className="ml-2 font-mono text-xs">Mumbai, India</span>
         </div>
