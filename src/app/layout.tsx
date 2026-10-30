@@ -3,9 +3,8 @@ import './globals.css';
 import { ThemeProvider } from '../components/ThemeProvider';
 import Navbar from '../components/Navbar';
 import PopBackground from '../components/PopBackground';
-import Loader from '../components/Loader';
 
-// Applies the saved theme before first paint so the page (and loader) never flash the wrong theme.
+// Applies the saved theme before first paint so the page never flashes the wrong theme.
 const themeScript = `try{var t=localStorage.getItem('theme');document.documentElement.classList.toggle('dark',t!=='light')}catch(e){document.documentElement.classList.add('dark')}`;
 
 const inter = Inter({
@@ -50,7 +49,6 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="bg-canvas text-ink antialiased transition-colors duration-300">
-        <Loader />
         <ThemeProvider>
           <PopBackground />
           <Navbar />

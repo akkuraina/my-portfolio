@@ -70,7 +70,7 @@ export default function Research() {
                 <div className="flex flex-wrap items-center gap-2 font-mono text-[11px]">
                   <span className="rounded-md bg-accent-tint px-2 py-0.5 font-medium text-accent">{paper.role}</span>
                   {isVisible(paper.status) && (
-                    <span className="rounded-md border border-accent-4/40 bg-accent-4/10 px-2 py-0.5 font-medium text-emerald-700 dark:text-accent-4">
+                    <span className="rounded-md border border-accent/40 bg-accent/10 px-2 py-0.5 font-medium text-accent">
                       <Copy value={paper.status} />
                     </span>
                   )}

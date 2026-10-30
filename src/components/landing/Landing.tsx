@@ -107,7 +107,7 @@ export default function Landing() {
     };
   }, []);
 
-  const letterDelay = 0.9; // starts as the loader fades out
+  const letterDelay = 0.15;
 
   return (
     <section
